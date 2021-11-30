@@ -1,0 +1,18 @@
+.zip
+.mp4
+
+## DEVELOP
+.venv
+.env
+.o
+**/bin
+**/__pycache__
+
+
+## LaTeX
+**/Vorlage_Ausarbeitung
+**/Vorlage_Präsentation
+**/out
+
+## Licensed and generated
+.pdf
