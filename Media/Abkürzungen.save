@@ -1,0 +1,12 @@
+grs:	golden ratio sequence
+df2:	distribution function 2D
+Idf2:	inverse distribution function 2D
+
+name-name:	function used on x and y coordinates
+
+u:	unscaled
+XXX:	N
+c:	carthesian
+p:	polar
+
+-GRS:	input was generated golden ratio sequence

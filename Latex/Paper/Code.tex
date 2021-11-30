@@ -1,0 +1,38 @@
+\newpage % TODO keep it??
+\section{Code}
+
+\begin{algorithm}
+    \caption{Implementation of a guide table in Python}
+    \begin{algorithmic}
+        \Statex \Comment{T is the table, PS, the partial sums, N the size of the table}
+        \Function{\_\_init\_\_}{self, N}
+            \State self.T = np.array([])
+            \State self.PS = np.array([])
+            \State self.N = N
+        \EndFunction
+
+        \Statex \Comment{func is the density function used}
+        \Function{setup\_table}{self, func}
+            \For{i in range(0, self.N)}
+                \State self.append(self.T, func(i / self.N))
+            \EndFor
+        \EndFunction
+        \State
+        \Function{setup\_partial\_sums}{self, partial\_sums}
+            \State self.PS = np.array(partial\_sums)
+        \EndFunction
+        \State
+        \Function{hash}{self, U}
+            \State return self.N * U
+        \EndFunction
+        
+        \Comment{test until inequation \eqref{eq:hash_ineq} is true}
+        \Function{search}{self, U}
+            \State Z = self.hash(U)
+            \While{self.PS[Z] <= U}
+                \State Z += 1
+            \EndWhile
+            \State return self.PS[Z]
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}

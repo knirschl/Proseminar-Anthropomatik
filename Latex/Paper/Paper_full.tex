@@ -1,0 +1,70 @@
+\documentclass[a4paper]{IEEEtran}
+
+% Ein paar hilfreiche Pakete
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Nummeriere Formel nur, wenn sie auch referenziert wird
+\mathtoolsset{showonlyrefs}
+
+% Für Code-Schnipsel
+\def\code#1{\texttt{#1}}
+
+% Graphics Paths
+\input
+\graphicspath{{../../Media}}
+
+% Header
+\markboth{Proseminar Anthropomatik WS 21/22: Von der Theorie zur Anwendung}{Proseminar Anthropomatik WS 21/22: Von der Theorie zur Anwendung}
+
+% Hier den Titel des eigenen Seminars eintragen
+\title{Punkt-Warping: Inversionsmethode mit Hash-Tabelle}
+
+% Hier deinen eigenen Namen
+\author{Lukas Knirsch}
+
+% --- START OF DOCUMENT ---
+\begin{document}
+
+% Erzeugt die Überschrift
+\maketitle
+
+% Abstract
+\begin{abstract}
+Bei wissenschaftlichen Simulationen oder bei hochqualitativen Schätzberechnungen werden sehr große Datensätze benötigt, 
+die nach bestimmten Merkmalen verteilt sind \cite{frisch_hanebeck-deterministic_gaussian_sampling-2021}. Diese Daten können häufig durch Funktionen wie eine Normalverteilung oder 
+multivariante Gaussche Verteilungen beschrieben werden. Umso gleichmäßiger die Daten aber verteilt sind, umso genauer  
+können die Simulationen oder Schätzungen berechnet werden. Die dafür bereits verwendeten Methoden besitzen aber Nachteile, 
+einer davon ist der hohe Rechenaufwand für die ungefähr gleichmäßige Verteilung im Raum. Aus diesem Grund soll in dieser 
+Ausarbeitung die Funktionsweise und eine Implementation der hash-basierten Inversionsmethode erarbeitet werden und ihr 
+möglicher Einsatz bei der gleichmäßigen Verteilung von Daten und Punkt-Warping im Allgemeinen.
+\end{abstract}
+
+% Text
+\input{Einleitung}
+
+\input{Funktionsweise}
+
+\input{Einschränkungen}
+
+\input{Vergleich}
+
+\input{Implementation}
+
+\input{Zusammenfassung}
+
+% Code
+\input{Code}
+
+% Literaturverzeichnis in Literatur.bib
+\bibliographystyle{plain}
+\bibliography{Literatur}
+\end{document}

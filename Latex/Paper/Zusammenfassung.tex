@@ -1,0 +1,17 @@
+\section{Zusammenfassung}
+Mit der vorgestellten Methode können vor allem große Datenmengen sehr schnell generiert werden. 
+Solange die Daten nicht zu dicht beieinander liegen und die Größe der Hashtabelle gut genug gewählt 
+ist, werden sogar alle Eigenschaften der Funktion behalten. Dadurch kann man die hashbasierte 
+Inversiosmethode mit Modellen zur uniforem Generierung von Zufallszahlen, wie zum Beispiel Golden 
+Ratio Sequences \cite{schretter-golden_ratio_sequences-2012} oder Fibonnaci Grids 
+\cite{frisch_hanebeck-deterministic_gaussian_sampling-2021}, verbunden werden. Da nur minimaler 
+Verwaltungsaufwand betrieben werden muss, um die Inversionsmethode in höheren Dimensionen anzuwenden, 
+kann sie beinahe überall eingesetzt werden, um in $O(1)$ Zufallszahlen zu generieren. Durch die 
+einfache Arbeitsweise, die in dieser Ausarbeitung beschrieben wurde, kann die vorgestellte Methode 
+von jedem implementiert und verwendet werden. 
+
+
+\subsection{Verbesserungsmöglichkeiten}
+Wie in dem Abschnitt \hyperref[Dichte]{Dichte} angesprochen, kann die Methode verbessert werden, 
+in dem nicht nur gleichverteilte Werte in der Hashtabelle gespeichert werden, sondern eine 
+Vorauswahl getroffen wird, die für Gebiete mit hoher Dichte mehr Einträge in der Hashtabelle speichert.
