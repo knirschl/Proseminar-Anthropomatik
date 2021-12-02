@@ -4,6 +4,7 @@ Idf2:	inverse distribution function 2D
 
 name-name:	function used on x and y coordinates
 
+i:  inverse
 u:	unscaled
 XXX:	N
 c:	carthesian
