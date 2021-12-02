@@ -4,7 +4,7 @@ import inv_func_2d as idf2
 import plot
 import mvn
 
-N = 500*2
+N = 500
 
 # set rotation matrix pre inversion
 rot_matrix = np.array([[1, 0],
@@ -15,13 +15,13 @@ U = grs.generate(N)
 RND = np.transpose(np.array([[grs.rand01() for i in range(N)], [grs.rand01() for i in range(N)]]))
 #U = np.matmul(U, rot_matrix)
 
-#plot.plot(idf2.sin_expo_inv(U), saveTo="idf2_sin-expo_iu1000c-GRS.pdf")
-#plot.plot(idf2.snrv_inv(U), saveTo="idf2_snrv_iu500c-GRS.pdf")
+#plot.plot(idf2.sin_expo_inv(U))
+#plot.plot(idf2.snrv_inv(U))
 
 #print(np.shape(idf2.logistic_sin(U)))
 
-plot.plot(idf2.logistic_sin_inv(U), saveTo="idf2_log-sin_iu500c-GRS.pdf")
-plot.plot(idf2.logistic_sin_inv(RND), saveTo="idf2_log-sin_ir500c-RND.pdf")
+plot.plot(idf2.logistic_sin_inv(U), centered=1, saveTo="idf2_log-sin_iu500c-GRS.pdf")
+plot.plot(idf2.logistic_sin_inv(RND), centered=1, saveTo="idf2_log-sin_iu500c-RND.pdf")
 #plot.plot(idf2.logistic_logistic(U))
 #plot.plot(idf2.logistic_logistic(RND))
 

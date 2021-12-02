@@ -16,25 +16,36 @@ def pol2cart(r, phi):
 '''
   Plot an 2D ndarray
 '''
-def plot(points, color=colors.CSS4_COLORS['dodgerblue'], markersize=3, system='cart', saveTo=''):
+def plot(points, centered=2, color=colors.CSS4_COLORS['dodgerblue'], markersize=3, system='cart', saveTo=''):
     x_axis = points[:, 0]
     y_axis = points[:, 1]
     xmin = np.min(x_axis)
     xmax = np.max(x_axis)
     ymin = np.min(y_axis)
     ymax = np.max(y_axis)
+    xabsmax = np.max(np.abs(x_axis))
+    yabsmax = np.max(np.abs(y_axis))
 
     ax = plt.subplot(polar=(system == 'pol'))
+    #ax.spines['left'].set_position('center')
     ax.plot(x_axis, y_axis, color=color, linestyle='', marker='.', markersize=markersize)
     
     #plt.axis('equal')
     #plt.gca().set_aspect('equal', adjustable='box')
     #ax.set_xlim([xmin-0.05, xmax+0.05])
     #ax.set_ylim([ymin-0.05, ymax+0.05])
-    ax.set_xlim([xmin, xmax])
-    ax.set_ylim([ymin, ymax])
-    #ax.set_xlim([-6, 6])
-    #ax.set_ylim([-6, 6])
+    if (centered == 1):
+        ax.set_xlim([-xabsmax, xabsmax])
+        ax.set_ylim([ymin, ymax])
+    elif (centered == -1):
+        ax.set_xlim([xmin, xmax])
+        ax.set_ylim([-yabsmax, yabsmax])
+    elif (centered == 0):
+        ax.set_xlim([-xabsmax, xabsmax])
+        ax.set_ylim([-yabsmax, yabsmax])
+    else:
+        ax.set_xlim([xmin, xmax])
+        ax.set_ylim([ymin, ymax])
     
     if (saveTo != ''):
         print('SAVING ENABLED')

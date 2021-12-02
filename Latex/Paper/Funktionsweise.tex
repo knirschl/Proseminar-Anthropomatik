@@ -2,9 +2,9 @@
 \label{funktion}
 
 Dieser Abschnitt erklärt die Arbeitsweise der Inversionsmethode im Allgemeinen. Danach wird kurz das Prinzip 
-der Hashtabelle wiederholt, um danach die Funktionsweise der hash-basierten Inversionsmethode zu erläutern.
+der Hashtabelle wiederholt, um danach die Funktionsweise der Hash-basierten Inversionsmethode zu erläutern.
 
-
+% SVG
 % \begin{figure}[!h]
 %     \centering
 %     \def\svgwidth{\columnwidth}
@@ -18,24 +18,24 @@ der Hashtabelle wiederholt, um danach die Funktionsweise der hash-basierten Inve
     \begin{subfigure}[b]{.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{pdf_plots/idf2_log-log_iu500c-GRS.pdf}
-        \caption{$500$ Punkte mit einer logistischen Dichte auf der X- und Y-Achse}
+        \caption{Logistische Dichte auf der X- und Y-Achse}
         \label{fig:loglog_examplePlot}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{pdf_plots/idf2_sin-expo_iu1000c-GRS.pdf}
-        \caption{$1000$ Punkte, sinusodial auf der X- und exponentiell auf der Y-Achse verteilt}
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_sin-expo_iu500c-GRS.pdf}
+        \caption{Sinusodial auf der X- und exponentiell auf der Y-Achse verteilt}
         \label{fig:sinexpo_examplePlot}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{pdf_plots/idf2_snrv_iu500c-GRS.pdf}
-        \caption{$500$ Punkte standardnormalverteilt}
+        \caption{Standardnormalverteilt}
         \label{fig:snrv_examplePlot}
     \end{subfigure}
-    \caption{Mehrere inverse Funktionen}
+    \caption{Mehrere inverse Funktionen mit je $500$ Punkten.}
     \label{fig:examplePlot}
 \end{figure*}
 
@@ -51,19 +51,19 @@ der Hashtabelle wiederholt, um danach die Funktionsweise der hash-basierten Inve
     Cauchy       & $1/2 + (1/\pi) \arctan(x)$ & $\tan(\pi U)$
     \end{tabular}
     \caption{Explizit invertierbare Verteilungsfunktionen \cite{devroye-non_uniform_random_variate-1986}}
-    \label{fig:invFuncs}
+    \label{tab:invFuncs}
 \end{table}
 
 Devroye \cite{devroye-non_uniform_random_variate-1986} beschreibt in seinem Buch die Inversionsmethode als eine 
 Methode, bei der mithilfe des Inversen $F^{-1}$ einer bekannten Verteilungsfunktion $F$ und mit einer uniformen, 
-zufälligen Zahl $U \in [0, 1]$ eine zufällige Zahl $X = F^{-1}(U)$ generiert wird. Dadurch gibt es eine monotone 
-Beziehung zwischen $U$ und $X$, weshalb ein Paar $(x_1, x_2)$, bei dem $X_1$ und $X_2$ maximal anti-korreliert 
-zueinander sind, mit 
+zufälligen Zahl $U \in [0, 1]$ eine zufällige Zahl $X = F^{-1}(U)$ generiert wird. Für schnell berechenbare und 
+bekannte Inverse wie in \ref{tab:invFuncs} ist diese Methode sehr einfach umzusetzen. Dadurch, dass die erzeugten 
+Zahlen aus fortlaufenden Zufallszahlen entstehen, gibt es eine monotone Beziehung zwischen $U$ und $X$. Das führt 
+dazu, dass ein Paar $(x_1, x_2)$, bei dem $X_1$ und $X_2$ maximal anti-korreliert zueinander sind, mit 
 \begin{equation}
     (F^{-1}(U),\, F^{-1}(1 - U))
 \end{equation}
-berechnet werden kann. Diese Eigenschaft wird vor allem in 
-Simulationen benötigt.
+berechnet werden kann. Diese Eigenschaft wird vor allem in Simulationen benötigt.
 
 Durch die Erzeugung der Zufallsvariable $X$ durch das Inverse einer Verteilungsfunktion kann die Inversionsmethode 
 allerdings nur dann optimal angewandt werden, wenn $F^{-1}$ einfach zu berechnen ist oder sogar schon bekannt ist. 
