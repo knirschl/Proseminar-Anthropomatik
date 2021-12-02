@@ -5,7 +5,55 @@ Dieser Abschnitt erklärt die Arbeitsweise der Inversionsmethode im Allgemeinen.
 der Hashtabelle wiederholt, um danach die Funktionsweise der hash-basierten Inversionsmethode zu erläutern.
 
 
+% \begin{figure}[!h]
+%     \centering
+%     \def\svgwidth{\columnwidth}
+%     % inkscape -D image.svg  -o image.pdf --export-latex
+%     \scalebox{1}{\input{../../Media/pdf_tex/examplePlot2.pdf_tex}}
+%     \caption{(a) 500 Punkte mit einer logistischen Dichte auf der X- und Y-Achse (b) 500 Punkte standardnormalverteilt \eqref{eq:stdnormdensity}.}
+%     \label{bild:examplePlot}
+% \end{figure}
+\begin{figure*}{htb!}
+    \centering
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_log-log_iu500c-GRS.pdf}
+        \caption{$500$ Punkte mit einer logistischen Dichte auf der X- und Y-Achse}
+        \label{fig:loglog_examplePlot}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_sin-expo_iu1000c-GRS.pdf}
+        \caption{$1000$ Punkte, sinusodial auf der X- und exponentiell auf der Y-Achse verteilt}
+        \label{fig:sinexpo_examplePlot}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_snrv_iu500c-GRS.pdf}
+        \caption{$500$ Punkte standardnormalverteilt}
+        \label{fig:snrv_examplePlot}
+    \end{subfigure}
+    \caption{Mehrere inverse Funktionen}
+    \label{fig:examplePlot}
+\end{figure*}
+
+
 \subsection{Inversionsmethode}
+\begin{table}[htb!]
+    \centering
+    \begin{tabular}{lll}
+    Name         & Funktion & Zufällige Variable \\
+                 &          &                    \\
+    Exponentiell & $1 - e^{-x}$ & $\log(1/U)$ \\
+    Logistisch   & $1 / (1 + e^{-x})$ & $-\log(\dfrac{1-U}{U})$ \\
+    Cauchy       & $1/2 + (1/\pi) \arctan(x)$ & $\tan(\pi U)$
+    \end{tabular}
+    \caption{Explizit invertierbare Verteilungsfunktionen \cite{devroye-non_uniform_random_variate-1986}}
+    \label{fig:invFuncs}
+\end{table}
+
 Devroye \cite{devroye-non_uniform_random_variate-1986} beschreibt in seinem Buch die Inversionsmethode als eine 
 Methode, bei der mithilfe des Inversen $F^{-1}$ einer bekannten Verteilungsfunktion $F$ und mit einer uniformen, 
 zufälligen Zahl $U \in [0, 1]$ eine zufällige Zahl $X = F^{-1}(U)$ generiert wird. Dadurch gibt es eine monotone 
@@ -22,19 +70,6 @@ allerdings nur dann optimal angewandt werden, wenn $F^{-1}$ einfach zu berechnen
 Durch heutige numerische Algorithmen können aber auch Funktionen, welche nicht \glqq per Hand\grqq{} invertierbar sind, in der 
 vorgestellten Weise benutzt werden. 
 
-\begin{table}
-    \centering
-    \begin{tabular}{lll}
-    Name         & Funktion & Zufällige Variable \\
-                 &          &                    \\
-    Exponentiell & $1 - e^{-x}$ & $\log(1/U)$ \\
-    Logistisch   & $1 / (1 + e^{-x})$ & $-\log(\dfrac{1-U}{U})$ \\
-    Cauchy       & $1/2 + (1/\pi) \arctan(x)$ & $\tan(\pi U)$
-    \end{tabular}
-    \caption{Explizit invertierbare Verteilungsfunktionen \cite{devroye-non_uniform_random_variate-1986}}
-    \label{fig:invFuncs}
-\end{table}
-
 Nach Devroye können, nur unter Verwendung sogenannter \glqq einfachen Transformationen\grqq, Paare von unabhängigen 
 Variablen generiert werden. Zum Beispiel kann mit der Standardnormalverteilung $\dfrac{e^{-x^2/2}}{\sqrt{2\pi}}$ ein Paar von 
 unabhängigen, zufälligen standardnormalverteilten Variablen mit 
@@ -43,22 +78,6 @@ unabhängigen, zufälligen standardnormalverteilten Variablen mit
     \label{eq:stdnormdensity}
 \end{equation}
 generiert werden. Dabei sind $U_1, U_2 \in [0, 1]$ unabhängige gleichverteile zufällige Variablen.
-
-% \begin{figure}[!h]
-%     \centering
-%     \def\svgwidth{\columnwidth}
-%     % inkscape -D image.svg  -o image.pdf --export-latex
-%     \scalebox{1}{\input{../../Media/pdf_tex/examplePlot2.pdf_tex}}
-%     \caption{(a) 500 Punkte mit einer logistischen Dichte auf der X- und Y-Achse (b) 500 Punkte standardnormalverteilt \eqref{eq:stdnormdensity}.}
-%     \label{bild:examplePlot}
-% \end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.48\textwidth]{fig1.png}
-    \caption{(a) 500 Punkte mit einer logistischen Dichte auf der X- und Y-Achse (b) 500 Punkte standardnormalverteilt \eqref{eq:stdnormdensity}.}
-    \label{bild:examplePlot}
-\end{figure}
-
 
 Bei einem Zufallsvektor $ (X_1, ..., X_n) \in \mathbb{R}^n$ wird die Inversionsmethode auf je eine Dimension angewandt 
 und dann die folgende Zufallszahl generiert und dann rekursiv die nachfolgenden Dimensionen berechnet. Genauer bedeutet das, 

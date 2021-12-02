@@ -1,5 +1,24 @@
 \section{Implementation}
 \label{impl}
+\begin{figure*}[htb!]
+    \centering
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_log-sin_ir500c-RND.pdf}
+        \caption{Eingabewerte zufällig generiert mit \code{random}}
+        \label{fig:logsin_random}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_log-sin_iu500c-GRS.pdf}
+        \caption{Eingabewerte aus einer Goldenen Schnitt Sequenz}
+        \label{fig:logsin_uniform}
+    \end{subfigure}
+    \caption{$500$ Punkte mit einer logistischen Dichte auf der X- und einer sinusoiden auf der Y-Achse}
+    \label{fig:rand_vs_uniform}
+\end{figure*}
+
 
 Um einen Eindruck der hashbasierten Inversionsmethode und ihrer Arbeitsweise zu bekommen, 
 wird jetzt eine konkrete Implementierung dieser angesprochen und Ergebnisse bei 
@@ -10,13 +29,6 @@ Schretter \cite{schretter-golden_ratio_sequences-2012} stellt am Ende der Arbeit
 C++-Methode zur Generierung einer zweidimensionalen Goldenen-Schnitt-Sequenz zur Verfügung. 
 Diese Methode wurde in ein Python-Script übertragen und alle, in diesem Kapitel erwähnte, zufällige, uniformen
 Variablen $U$ werden mit diesem Script generiert.
-\begin{figure}
-    \centering
-    \includegraphics[width=0.48\textwidth]{fig2.png}
-    \caption{500 Punkte mit einer logistischen Dichte auf der X- und sinusoider auf der Y-Achse 
-            (a) Ursprungspunkte zufällig mit \code{random} (b) Ursprungspunkte aus einer Golden Ratio Sequence.}
-    \label{bild:grs-vs-rnd}
-\end{figure}
 
 Zum Testen der vorgestellten Methode wurde das Konzept von Chen und Asau \cite{chen_asau-generating_random_variates-1974} 
 implementiert. Dabei wurde kein großer Wert auf optimale Laufzeiten gelegt, sondern darauf, eine Demonstration 

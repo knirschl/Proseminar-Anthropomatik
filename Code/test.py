@@ -4,7 +4,7 @@ import inv_func_2d as idf2
 import plot
 import mvn
 
-N = 500
+N = 500*2
 
 # set rotation matrix pre inversion
 rot_matrix = np.array([[1, 0],
@@ -15,19 +15,23 @@ U = grs.generate(N)
 RND = np.transpose(np.array([[grs.rand01() for i in range(N)], [grs.rand01() for i in range(N)]]))
 #U = np.matmul(U, rot_matrix)
 
-print(np.shape(idf2.logistic_sin(U)))
+#plot.plot(idf2.sin_expo_inv(U), saveTo="idf2_sin-expo_iu1000c-GRS.pdf")
+#plot.plot(idf2.snrv_inv(U), saveTo="idf2_snrv_iu500c-GRS.pdf")
 
-plot.plot(idf2.logistic_sin(U))
-plot.plot(idf2.logistic_sin(RND))
-plot.plot(idf2.logistic_logistic(U))
-plot.plot(idf2.logistic_logistic(RND))
-'''
+#print(np.shape(idf2.logistic_sin(U)))
+
+plot.plot(idf2.logistic_sin_inv(U), saveTo="idf2_log-sin_iu500c-GRS.pdf")
+plot.plot(idf2.logistic_sin_inv(RND), saveTo="idf2_log-sin_ir500c-RND.pdf")
+#plot.plot(idf2.logistic_logistic(U))
+#plot.plot(idf2.logistic_logistic(RND))
+
 mu = np.array([0.5, 0])
 cov_matrix = np.array([[1, 3/5],
                        [3/5, 2]])
-                       
+'''
 mvn1 = mvn.calcP(U, mu, cov_matrix)
 plot.plot(mvn1)
+
 coeff = np.array([0.5, 0.5])
 
 plot.plot(points)
@@ -50,3 +54,15 @@ plot.plotM(np.array([idf2.expo_expo(points),
 
 plot.plot(idf2.expo_expo(points))
 '''
+
+import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d as plt3
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+_mvn = mvn.calcP(U, mu, cov_matrix)
+_mvn3D = np.stack((_mvn, _mvn), axis=0)
+c = U[:, 0] + U[:, 1]
+ax.scatter(U[:, 0], U[:, 1], _mvn, c=c)
+
+#plt.show()
+

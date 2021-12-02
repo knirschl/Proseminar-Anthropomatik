@@ -26,10 +26,16 @@ def plot(points, color=colors.CSS4_COLORS['dodgerblue'], markersize=3, system='c
 
     ax = plt.subplot(polar=(system == 'pol'))
     ax.plot(x_axis, y_axis, color=color, linestyle='', marker='.', markersize=markersize)
+    
     #plt.axis('equal')
-    plt.gca().set_aspect('equal', adjustable='box')
+    #plt.gca().set_aspect('equal', adjustable='box')
+    #ax.set_xlim([xmin-0.05, xmax+0.05])
+    #ax.set_ylim([ymin-0.05, ymax+0.05])
     ax.set_xlim([xmin, xmax])
     ax.set_ylim([ymin, ymax])
+    #ax.set_xlim([-6, 6])
+    #ax.set_ylim([-6, 6])
+    
     if (saveTo != ''):
         print('SAVING ENABLED')
         _, ext = os.path.splitext(saveTo)

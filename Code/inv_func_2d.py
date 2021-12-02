@@ -25,10 +25,10 @@ def logistic_sin_inv(U):
 
 def sin_expo_inv(U):
     return stack(np.arcsin(U[:, 0]),
-                idf.expo_inv(U[:, 1]))
+                -idf.expo_inv(U[:, 1]))
 
-def snrv_inv(U_1): # standard normal random variate
-    return stack(np.sqrt(np.log(1/U_1[:, 0])) * np.cos(2 * U_1[:, 1] * np.pi),
-                np.sqrt(np.log(1/U_1[:, 0])) * np.sin(2 * U_1[:, 1] * np.pi))
+def snrv_inv(U): # standard normal random variate
+    return stack(np.sqrt(np.log(1/U[:, 0])) * np.cos(2 * U[:, 1] * np.pi),
+                np.sqrt(np.log(1/U[:, 0])) * np.sin(2 * U[:, 1] * np.pi))
 
     

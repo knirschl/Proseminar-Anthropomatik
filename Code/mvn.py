@@ -9,9 +9,6 @@ PI2 = 2 * np.pi
 def stack(L, L_):
     return np.stack((L, L_), axis=0)
 
-def s(A):
-    print(np.shape(A))
-
 def exp(x, mu, cov) -> np.double:
     x_min_mu = x - mu
     x_min_mu_T = np.transpose(x_min_mu)
@@ -34,6 +31,5 @@ def calcP(x, mu, cov) -> np.ndarray:
     vec = []
     for i in range(0, n):
         vec.append(p(x[i, :], mu, cov))
-    vec = np.transpose(stack(vec, vec))
-    s(vec)
-    return vec
+    #vec = np.transpose(stack(vec, vec))
+    return np.array(vec)

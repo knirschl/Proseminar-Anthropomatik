@@ -4,10 +4,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
-\usepackage{subcaption}
+%\usepackage[section]{placeins}
 \usepackage{hyperref}
 \usepackage{algpseudocode}
 \usepackage{algorithm}
@@ -18,9 +20,19 @@
 % Für Code-Schnipsel
 \def\code#1{\texttt{#1}}
 
+% Für Pseudocode input und output einer funktion
+\algblock{Input}{EndInput}
+\algnotext{EndInput}
+\algblock{Output}{EndOutput}
+\algnotext{EndOutput}
+\newcommand{\Desc}[2]{\State \makebox[3em][l]{#1}#2}
+
 % Graphics Paths
 \input
 \graphicspath{{../../Media}}
+
+% Für subfigure plots
+\captionsetup[subfigure]{justification=centering}
 
 % Header
 \markboth{Proseminar Anthropomatik WS 21/22: Von der Theorie zur Anwendung}{Proseminar Anthropomatik WS 21/22: Von der Theorie zur Anwendung}
