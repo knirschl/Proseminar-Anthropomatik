@@ -1,38 +1,76 @@
-\newpage % TODO keep it??
 \section{Code}
 
 \begin{algorithm}
-    \caption{Implementation of a guide table in Python}
+    \caption{Implementation of the hash-based inversion method (Part 1)}
     \begin{algorithmic}
-        \Statex \Comment{T is the table, PS, the partial sums, N the size of the table}
-        \Function{\_\_init\_\_}{self, N}
-            \State self.T = np.array([])
-            \State self.PS = np.array([])
-            \State self.N = N
-        \EndFunction
-
-        \Statex \Comment{func is the density function used}
-        \Function{setup\_table}{self, func}
-            \For{i in range(0, self.N)}
-                \State self.append(self.T, func(i / self.N))
-            \EndFor
-        \EndFunction
-        \State
-        \Function{setup\_partial\_sums}{self, partial\_sums}
-            \State self.PS = np.array(partial\_sums)
-        \EndFunction
-        \State
-        \Function{hash}{self, U}
-            \State return self.N * U
-        \EndFunction
         
-        \Comment{test until inequation \eqref{eq:hash_ineq} is true}
-        \Function{search}{self, U}
-            \State Z = self.hash(U)
-            \While{self.PS[Z] <= U}
-                \State Z += 1
+        \Input
+        \Desc{N}{Size of the hash table}
+        \Desc{f\_inv}{inverse function for this table}
+        \EndInput
+        \Function{\_\_init\_\_}{$self$, N, $f\_inv$}
+            \State $self.T \gets [\,]$ \Comment{hash table}
+            \State $self.PS \gets$ np.array$([\,])$ \Comment{list of partial sums}
+            \State $self.N \gets$ N
+            \State $self.f\_inv \gets$
+            \For{$i$ in range$(0, self.N)$}
+                \State $self.T.$append$(self.f\_inv(\frac{i}{self.N}))$
+            \EndFor
+            \State $self.T \gets$ np.array$(self.T)$
+        \EndFunction
+        \State
+        
+        \Input
+        \Desc{f}{inverse function of $self.f\_inv$}
+        \Desc{max}{amount of partial sums}
+        \EndInput
+        \Function{setup\_partial\_sums\_uniform}{$self$, f, max}
+            \State $ps \gets [\,]$
+            \State $i \gets 0.0$
+            \State $step \gets \frac{\textrm{max}}{self.N}$
+            \While{$i < \textrm{max}$}
+                \If{$i == 0.0$}
+                    \State $ps.\textrm{append}(\textrm{f}(0))$
+                \Else
+                    \State $ps.\textrm{append}(ps[-1] + \textrm{f}(i))$
+                \EndIf
+                \State $i \gets i + step$
             \EndWhile
-            \State return self.PS[Z]
+            \State $self.PS \gets \textrm{np.array}(ps)$
+        \EndFunction
+        \State
+        \algstore{bkbreak}
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+    \caption{Implementation of the hash-based inversion method (Part 1)}
+    \begin{algorithmic}
+        \algrestore{bkbreak}
+
+        \Input
+        \Desc{U}{random variate}
+        \EndInput
+        \Output
+        \Desc{h}{hashed value of $U$}
+        \EndOutput
+        \Function{hash}{$self$, U}
+            \State\Return $\lfloor self.N * \textrm{U} \rfloor$
+        \EndFunction
+        \State
+
+        \Input
+        \Desc{U}{random variate}
+        \EndInput
+        \Output
+        \Desc{X}{from hash table calculated value corresponding to $U$, so that $\mathrm{f^{-1}}(U) = X$}
+        \EndOutput
+        \Function{search\_single}{$self$, U}
+            \State $Z \gets self.hash(\textrm{U})$
+            \While{$self.PS[Z] \le \textrm{U}$}
+                $Z \gets Z + 1$
+            \EndWhile
+            \State\Return $self.T[Z]$
         \EndFunction
     \end{algorithmic}
 \end{algorithm}
