@@ -126,7 +126,7 @@ mehr effizient anwendbar. Um sie beschleunigen zu können wurden deshalb mehrere
 Möglichkeiten entwickelt. Eine davon ist es, eine Hashtabelle in der von Chen und 
 Asau \cite{chen_asau-generating_random_variates-1974} erarbeiteten Vorgehensweise 
 verwendet wird. Um diese Methode zu verwenden, wird für $j \in [1, n]$ die 
-Wahrscheinlichkeit $p_j$ als $p_j = P(X=v_j)$ definiert. Mithilfe einer uniformen 
+Wahrscheinlichkeit $p_j$ als $p_j = \mathbb{P}(X=v_j)$ definiert. Mithilfe einer uniformen 
 Variablen $U \in [0, 1]$ wird die Zufallsvariable $X$ durch 
 \begin{equation}
     F(v_{j-1}) < U \leq F(v_j)
@@ -163,9 +163,9 @@ $v_j$ gesetzt.
 \cite{devroye-non_uniform_random_variate-1986} eine abgewandelte Methode 
 vorgestellt. Dabei wird eine Hashtabelle der Größe $N$ erstellt, wobei $N$ die 
 Anzahl der möglichen Werte angibt. An der $i$-ten Stelle in der Hashtabelle wird 
-der Wert von $X$ mit $P(X) = p_X$ gespeichert, falls $U = \dfrac{i}{N},\; i \in 
+der Wert von $X$ mit $\mathbb{P}(X) = p_X$ gespeichert, falls $U = \dfrac{i}{N},\; i \in 
 [0,\, N)$ wäre. Nach dieser Initialiserung wird der Startindex $Z$, ab welchem 
 eine Lösung zu finden ist, mit $Z = \lfloor N * U \rfloor$ berechnet. Falls man 
-nuneine kummulative Verteilung vorliegen hat, oder eine Tabelle mit Partialsummen 
+nun eine kummulative Verteilung vorliegen hat, oder eine Tabelle mit Partialsummen 
 erstellt hat, kann jetzt mit minimalem Aufwand ab der $Z$-ten Partialsumme eine 
 Lösung der bekannten Formel \eqref{eq:hash_ineq} von Chen und Asau gesucht werden.

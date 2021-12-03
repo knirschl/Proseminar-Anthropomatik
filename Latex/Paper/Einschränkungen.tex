@@ -1,32 +1,50 @@
 \section{Einschränkungen}
 Nachdem die Funktionsweise der Hash-basierten Inversionsmethode erklärt wurde, 
-werden nun mögliche Einschränkungen der Methode näher betrachtet.
+werden nun mögliche Einschränkungen der Methode näher betrachtet und, wenn möglich, 
+Lösungsansätze  aufgezeigt.
 
 
 \subsection{Dimension}
 Da in dem Abschnitt über die Funktionsweise der \hyperref[funktion]{Inversionsmethode} 
 schon erklärt wurde, wie die Inversionsmethode in mehreren Dimensionen eingesetzt werden kann, 
-ist leicht zu sehen, dass mit etwas Mehraufwand auch die hash-basierte Methode in n Dimensionen 
-verwendet werden kann. Dieser Mehraufwand besteht hauptsächlich darin, nicht 
-mehr nur eine Hashtabelle zu verwalten, sondern mehrere. 
+ist leicht zu erkennen, dass mit etwas Mehraufwand auch die hash-basierte Methode in $n$ 
+Dimensionen verwendet werden kann. Da die Werte der einzelnen Dimensionen rekursiv und 
+abhängig voneinander berechnet werden, reicht nicht mehr nur eine Hashtabelle aus. Für 
+jede Dimension muss eine Hashtabelle erstellt werden. Aufgrund der Abhängigkeit muss die 
+Hashtabelle der höchsten Dimension zuerst berechnet werden. Dies funktioniert nach dem 
+bekannten Muster, aber für alle weiteren Dimensionen müssen nun andere Funktionen zum 
+Populieren der Tabellen verwendet werden. 
+
+Anstelle der gegebenen Dichtefunktion $F$ mit einer Verteilung $\mathbb{P}(X) = p_X$ ist die 
+jeweilige Verteilung gegeben durch $\mathbb{P}(X|Y)=\dfrac{\mathbb{P}(X\cap Y)}{\mathbb{P}(Y)}$, 
+wobei $X$ der gesuchte Wert in der aktuellen Dimension ist und Y der Wert der höheren Dimension. 
+An diesem Aufbau sieht man, dass die Hash-basierte Inversionsmethode zwar theoretisch für 
+Punkt-Warping in beliebig vielen Dimensionen verwendet werden kann, doch bei zu vielen Dimensionen 
+wird der Verwaltungsaufwand zu groß und die Initialisierung zu rechenaufwändig. Ab wievielen 
+Dimensionen das der Fall ist, kann alllerdings nicht pauschal gesagt werden, da man mit kleineren 
+Hashtabellen zwar ungenauer invertiert, aber weniger Rechenaufwand hat. 
 
 
 \subsection{Abbildung}
-Da die Inversionsmethode nur sinnvoll einsetzbar ist, wenn es möglich ist, das Inverse einer Funktion zu 
-berechnen, oder die Dichtefunktion direkt bekannt ist, ist auch die hashbasierte Inversion nur dann einsetzbar.
-Ansonsten erhält die Methode alle Eigenschaften ihrer Eingabefunktion. Dazu gehören Winkelerhalt, aber auch 
-Korrelation und statistische Unabhängigkeit, da durch die Hashtabelle keine Eigenschaften verloren gehen, solange 
-die Punkte nicht zu dicht beieinander liegen (siehe \hyperref[Dichte]{Dichte}).  
+Da die Inversionsmethode nur sinnvoll einsetzbar ist, wenn es möglich ist, das Inverse einer 
+Funktion zu berechnen, oder die Dichtefunktion direkt bekannt ist, ist auch die hashbasierte 
+Inversion nur dann einsetzbar. Ansonsten erhält die Methode alle Eigenschaften ihrer 
+Eingabefunktion. Dazu gehören Winkelerhalt, aber auch Korrelation und statistische 
+Unabhängigkeit, da durch die Hashtabelle keine Eigenschaften verloren gehen, solange 
+die Punkte nicht zu dicht beieinander liegen (siehe \hyperref[Dichte]{Dichte}).
 
 
 \subsection{Dichte}
 \label{Dichte}
-Da durch den Einsatz der Hashtabelle nur endlich viele Werte gespeichert werden können, ist eine Berechnung 
-von Zufallsvariablen $X$ nur dann sinnvoll, wenn diese nicht zu dicht beieinander liegen und durch Annäherung 
-auf einen Punkt gemappt werden würden. Deshalb sollte vor Einsatz der Tabelle die Dichte bekannt sein, damit die 
-Größe $N$ der Hashtabelle optimal gewählt werden kann.
+Da durch den Einsatz der Hashtabelle nur endlich viele Werte gespeichert werden können, ist 
+eine Berechnung von Zufallsvariablen $X$ nur dann sinnvoll, wenn diese nicht zu dicht 
+beieinander liegen und durch Annäherung auf einen Punkt gemappt werden würden, da die Tabelle 
+eine zu geringe Größe hat, um ausreichend viele unterschiedliche Werte zu speichern. Deshalb 
+sollte vor Einsatz der Tabelle die Dichte bekannt sein, damit die Größe $N$ der 
+Hashtabelle optimal gewählt werden kann.
 
-Unterscheidet sich die Dichte sehr stark an unterschiedlichen Punkten, kann sogar die Werteverteilung in der Tabelle 
-angepasst werden, indem nicht mehr gleichmäßig verteilte Punkte eingesetzt werden, sondern je nach Dichte mehr 
-oder weniger. Diese Anpassungen können die Initialisierung der Hashtabelle allerdings sehr viel langsamer machen, 
+Unterscheidet sich die Dichte sehr stark an unterschiedlichen Punkten, kann sogar die 
+Werteverteilung in der Tabelle angepasst werden, indem nicht mehr gleichmäßig verteilte 
+Punkte eingesetzt werden, sondern je nach Dichte mehr oder weniger. Diese Anpassungen 
+können die Initialisierung der Hashtabelle allerdings sehr viel langsamer oder größer machen, 
 weshalb in solchen Fällen abgewogen werden muss, was die Hashtabelle können muss.
