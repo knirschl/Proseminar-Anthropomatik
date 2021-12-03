@@ -1,8 +1,9 @@
 \section{Funktionsweise}
 \label{funktion}
 
-Dieser Abschnitt erklärt die Arbeitsweise der Inversionsmethode im Allgemeinen. Danach wird kurz das Prinzip 
-der Hashtabelle wiederholt, um danach die Funktionsweise der Hash-basierten Inversionsmethode zu erläutern.
+Dieser Abschnitt erklärt die Arbeitsweise der Inversionsmethode im Allgemeinen. 
+Danach wird kurz das Prinzip der Hashtabelle wiederholt, um danach die 
+Funktionsweise der Hash-basierten Inversionsmethode zu erläutern.
 
 % SVG
 % \begin{figure}[!h]
@@ -10,7 +11,8 @@ der Hashtabelle wiederholt, um danach die Funktionsweise der Hash-basierten Inve
 %     \def\svgwidth{\columnwidth}
 %     % inkscape -D image.svg  -o image.pdf --export-latex
 %     \scalebox{1}{\input{../../Media/pdf_tex/examplePlot2.pdf_tex}}
-%     \caption{(a) 500 Punkte mit einer logistischen Dichte auf der X- und Y-Achse (b) 500 Punkte standardnormalverteilt \eqref{eq:stdnormdensity}.}
+%     \caption{(a) 500 Punkte mit einer logistischen Dichte auf der X- und Y-Achse 
+% (b) 500 Punkte standardnormalverteilt \eqref{eq:stdnormdensity}.}
 %     \label{bild:examplePlot}
 % \end{figure}
 \begin{figure*}{htb!}
@@ -32,7 +34,7 @@ der Hashtabelle wiederholt, um danach die Funktionsweise der Hash-basierten Inve
     \begin{subfigure}[b]{.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{pdf_plots/idf2_snrv_iu500c-GRS.pdf}
-        \caption{Standardnormalverteilt}
+        \caption{Standardnormalverteilung in beide Richtungen}
         \label{fig:snrv_examplePlot}
     \end{subfigure}
     \caption{Mehrere inverse Funktionen mit je $500$ Punkten.}
@@ -54,77 +56,116 @@ der Hashtabelle wiederholt, um danach die Funktionsweise der Hash-basierten Inve
     \label{tab:invFuncs}
 \end{table}
 
-Devroye \cite{devroye-non_uniform_random_variate-1986} beschreibt in seinem Buch die Inversionsmethode als eine 
-Methode, bei der mithilfe des Inversen $F^{-1}$ einer bekannten Verteilungsfunktion $F$ und mit einer uniformen, 
-zufälligen Zahl $U \in [0, 1]$ eine zufällige Zahl $X = F^{-1}(U)$ generiert wird. Für schnell berechenbare und 
-bekannte Inverse wie in \ref{tab:invFuncs} ist diese Methode sehr einfach umzusetzen. Dadurch, dass die erzeugten 
-Zahlen aus fortlaufenden Zufallszahlen entstehen, gibt es eine monotone Beziehung zwischen $U$ und $X$. Das führt 
-dazu, dass ein Paar $(x_1, x_2)$, bei dem $X_1$ und $X_2$ maximal anti-korreliert zueinander sind, mit 
+Devroye \cite{devroye-non_uniform_random_variate-1986} beschreibt in seinem Buch 
+die Inversionsmethode als eine Methode, bei der mithilfe des Inversen $F^{-1}$ 
+einer bekannten Verteilungsfunktion $F$ und mit einer uniformen, zufälligen Zahl 
+$U \in [0, 1]$ eine zufällige Zahl $X = F^{-1}(U)$ generiert wird. Für schnell 
+berechenbare und bekannte Inverse, zu denen die Funktionen in Tabelle 
+\ref{tab:invFuncs} gehören, ist diese Methode sehr einfach umzusetzen. Dadurch, 
+dass die erzeugten Zahlen aus fortlaufenden Zufallszahlen entstehen, gibt es eine 
+monotone Beziehung zwischen $U$ und $X$. Das führt dazu, dass ein Paar 
+$(x_1, x_2)$, bei dem $X_1$ und $X_2$ maximal anti-korreliert zueinander sind, mit 
 \begin{equation}
     (F^{-1}(U),\, F^{-1}(1 - U))
 \end{equation}
 berechnet werden kann. Diese Eigenschaft wird vor allem in Simulationen benötigt.
+Wählt man als Eingabe $U$ eine Goldene-Schnitt-Sequenz, wie sie in \ref{fig:grs500} 
+zu sehen ist, dann können diese gleichmäßig verteilten Punkte durch die 
+Inversionsmethode \glqq gewarped\grqq werden. In \ref{fig:examplePlot} sind drei solche 
+verformten Punktmengen zu sehen. Alle drei Abbildungen zeigen 500 Punkte, wobei 
+einmal \ref{fig:loglog_examplePlot} auf beiden Achsen eine logistische Dichte \ref{tab:invFuncs} angewendet wurde. 
+Im Gegensatz dazu ist bei \ref{fig:sinexpo_examplePlot} die X-Koordinate mit einer 
+Sinusfunktion verschoben und die Y-Koordinate nach einer exponentiellen Verteilung \ref{tab:invFuncs}.
+Man kann leicht die sinusförmigen Wellen sehen, bei denen die Punkte enger aneinander liegen. 
+In der  dritten Abbildung \ref{fig:snrv_examplePlot} sind beide Koordinatenanteile standardnormalverteilt
+verformt, wodurch das bekannte Spiralmuster entsteht. 
 
-Durch die Erzeugung der Zufallsvariable $X$ durch das Inverse einer Verteilungsfunktion kann die Inversionsmethode 
-allerdings nur dann optimal angewandt werden, wenn $F^{-1}$ einfach zu berechnen ist oder sogar schon bekannt ist. 
-Durch heutige numerische Algorithmen können aber auch Funktionen, welche nicht \glqq per Hand\grqq{} invertierbar sind, in der 
-vorgestellten Weise benutzt werden. 
+Durch die Erzeugung der Zufallsvariable $X$ durch das Inverse einer 
+Verteilungsfunktion kann die Inversionsmethode allerdings nur dann optimal 
+angewandt werden, wenn $F^{-1}$ einfach zu berechnen ist oder sogar schon bekannt 
+ist. Durch heutige numerische Algorithmen können aber auch Funktionen, welche 
+nicht \glqq per Hand\grqq{} invertierbar sind, in der vorgestellten Weise benutzt 
+werden. 
 
-Nach Devroye können, nur unter Verwendung sogenannter \glqq einfachen Transformationen\grqq, Paare von unabhängigen 
-Variablen generiert werden. Zum Beispiel kann mit der Standardnormalverteilung $\dfrac{e^{-x^2/2}}{\sqrt{2\pi}}$ ein Paar von 
-unabhängigen, zufälligen standardnormalverteilten Variablen mit 
+Nach Devroye können, nur unter Verwendung sogenannter \glqq einfachen 
+Transformationen\grqq, Paare von unabhängigen Variablen generiert werden. Zum 
+Beispiel kann mit der Standardnormalverteilung $\dfrac{e^{-x^2/2}}{\sqrt{2\pi}}$ 
+ein Paar von unabhängigen, zufälligen standardnormalverteilten Variablen mit 
 \begin{equation}
-    (X, Y) = \bigg( \sqrt{\log(\dfrac{1}{U_1})}\cos(2\pi U_2),\, \sqrt{\log(\dfrac{1}{U_1})}\sin(2\pi U_2) \bigg)
+    (X, Y) = \bigg( \sqrt{\log(\dfrac{1}{U_1})}\cos(2\pi U_2),\, \sqrt{\log(
+        \dfrac{1}{U_1})}\sin(2\pi U_2) \bigg)
     \label{eq:stdnormdensity}
 \end{equation}
-generiert werden. Dabei sind $U_1, U_2 \in [0, 1]$ unabhängige gleichverteile zufällige Variablen.
+generiert werden. Dabei sind $U_1, U_2 \in [0, 1]$ unabhängige gleichverteile 
+zufällige Variablen.
 
-Bei einem Zufallsvektor $ (X_1, ..., X_n) \in \mathbb{R}^n$ wird die Inversionsmethode auf je eine Dimension angewandt 
-und dann die folgende Zufallszahl generiert und dann rekursiv die nachfolgenden Dimensionen berechnet. Genauer bedeutet das, 
-dass zuerst die Variable $X_n$ der höchsten Dimension berechnet wird. Danach wird $X_{n-1}$ mit der zugewiesenen Funktion 
-berechnet, wobei $X_n$ als bedingte Verteilung mit eingerechnet wird.
+Bei einem Zufallsvektor $ (X_1, ..., X_n) \in \mathbb{R}^n$ wird die 
+Inversionsmethode auf je eine Dimension angewandt, wobei die Zufallszahl dieser 
+Dimension generiert wird und dann rekursiv die nachfolgenden Dimensionen 
+berechnet werden. Genauer bedeutet das, dass zuerst die Variable $X_n$ der 
+höchsten Dimension berechnet wird. Danach wird $X_{n-1}$ mit der zugewiesenen 
+Funktion berechnet, wobei $X_n$ als bedingte Verteilung mit eingerechnet wird.
 
 
 \subsection{Hashtabelle}
-Eine Hashtabelle ist eine Datenstruktur, die mithilfe einer Hashfunktion $H: V \rightarrow K$ einen Wert $v \in V$ 
-auf den zugehörigen Schlüssel $k \in K$ ab. Die Werte werden dann in einem Array gespeichert, 
-wobei der Schlüssel die Position angibt. Da es in der Praxis meistens mehr Werte als Stellen im Array gibt, treten 
-allerdings Kollisionen auf. Diese können entweder dadurch gelöst werden, dass das Array pro Schlüssel eine verkettete 
-Liste enthält. In diese werden dann die kollidierende Werte hintereinander geschrieben. Die zweite verbreitete Möglichkeit 
-ist lineares Sondieren. Dabei wird der Wert immer an die nächste freie Stelle in der Hashtabelle, von seinem eigentlichem 
-Platz aus gesehen, geschrieben.
+Eine Hashtabelle ist eine Datenstruktur, die mithilfe einer Hashfunktion 
+$H: V \rightarrow K$ einen Wert $v \in V$ auf den zugehörigen Schlüssel $k \in K$ 
+abbildet. Die Werte werden dann in einem Array gespeichert, wobei der Schlüssel 
+die Position angibt. Da es in der Praxis meistens mehr Werte als Stellen im Array 
+gibt, treten allerdings Kollisionen auf. Diese können entweder dadurch gelöst 
+werden, dass das Array pro Schlüssel eine verkettete Liste enthält. In diese 
+werden dann die kollidierende Werte hintereinander geschrieben. Die zweite 
+verbreitete Möglichkeit ist lineares Sondieren. Dabei wird der Wert immer an die 
+nächste freie Stelle in der Hashtabelle, von seinem eigentlichem Platz aus 
+gesehen, geschrieben.
 
 
 \subsection{Inversion mit Hashing}
-Um die Inversionsmethode zu beschleunigen, gibt es mehrere Möglichkeiten. Eine davon ist, 
-eine Hashtabelle zu verwenden, indem die von Chen und Asau \cite{chen_asau-generating_random_variates-1974} erarbeitete 
-Vorgehensweise verwendet wird. Um diese Methode zu verwenden, wird für $j \in [1, n]$ die Wahrscheinlichkeit $p_j$ als 
-$p_j = P(X=v_y)$ definiert. Mithilfe einer uniformen Variablen $U \in [0, 1]$ wird die Zufallsvariable $X$ durch 
+Bei komplizierteren Inversen ist die normale Inversionsmethode nicht 
+mehr effizient anwendbar. Um sie beschleunigen zu können wurden deshalb mehrere 
+Möglichkeiten entwickelt. Eine davon ist es, eine Hashtabelle in der von Chen und 
+Asau \cite{chen_asau-generating_random_variates-1974} erarbeiteten Vorgehensweise 
+verwendet wird. Um diese Methode zu verwenden, wird für $j \in [1, n]$ die 
+Wahrscheinlichkeit $p_j$ als $p_j = P(X=v_j)$ definiert. Mithilfe einer uniformen 
+Variablen $U \in [0, 1]$ wird die Zufallsvariable $X$ durch 
 \begin{equation}
     F(v_{j-1}) < U \leq F(v_j)
     \label{eq:hash_ineq}
 \end{equation}
-berechnet, wobei $X = v_j$ ist. Diese Ungleichheit kann zwar ohne großen Aufwand berechnet werden, doch bei vielen $j$ 
-läuft jede Generierung in $O(n)$. Mit dem Einsatz einer Hashtabelle, die wie eine Indextabelle agiert, kann jede 
-Generierung in approximiert $O(1)$ laufen. Dafür wird aus den Werten $F(v_j)$ ein Wert
+berechnet, wobei $X = v_j$ ist. Diese Ungleichheit kann zwar ohne großen Aufwand 
+berechnet werden, doch bei sehr großem $n$ läuft jede einzelne Generierung trivial 
+in $O(n)$. Mit dem Einsatz einer Hashtabelle, die wie eine Indextabelle agiert, 
+wird für jede Generierung nur approximiert $O(1)$ Zeit benötigt. Dafür wird aus 
+den Werten $F(v_j)$ der Wert
 \begin{equation}
      I_j = \lfloor F(v_j) * d \rfloor + 1
      \label{eq:hash_I}
 \end{equation}
-berechnet. Dabei wird $d = 10^m$ so gewählt, dass $\mathrm{min}(I_j) = 1$ ist. Danach wird die Indextabelle $T(k),\, k \in [1,\, 
-\mathrm{max}(I_j)]$ initialisiert. Dafür werden die $I_j$ als Indexliste verwendet. Für jedes $I_j$ wird $T(I_j)$ als das 
-$k$ gesetzt, für das $I(k) = I(j)$ ist. Falls ein Element $I_k$ nicht in der Indexliste vorhanden ist, gilt $T(I_k) = T(I_{k+1})$. 
+berechnet. Dabei sollte $d = 10^m$ so gewählt werden, dass $\min\limits_{0\le 
+j\le n}(I_j) = 1$ ist. Danach wird die Indextabelle $T(k),\, k \in [1,\, \max
+\limits_{0\le j\le n}(I_j)]$ initialisiert. Dafür werden die $I_j$ als Indexliste 
+verwendet. Für jedes $I_j$ wird $T(I_j)$ als das $k$ gesetzt, für das $I(k) = 
+I(j)$ ist. Falls ein Element $I_k$ nicht in der Indexliste vorhanden ist, gilt 
+$T(I_k) = T(I_{k+1})$. 
 
-Nach diesen Vorberechnungen und Initialisierungen kann die Hashtabelle verwendet werden, um eine Zufallszahl $X$ zu berechnen. 
-Dafür wird aus einer uniformen zufälligen Zahl $U\; I_U$ \eqref{eq:hash_I} und $i = T(I_U)$ berechnet. $i$ beschränkt 
-damit die Teilmengen $F(v_j)$, die \eqref{eq:hash_ineq} erfüllen können. Die zu überprüfenden Teilmengen sind gegeben 
-durch $\{F(v_i),\, \dots, \, F(v_{r-1})\}$, wobei $r$ die nächstgrößere Zahl ist, für die $I(i) \neq I(r)$ gilt. 
-Für den Fall, dass $U > F(v_{r-1})$ ist, gilt bei Einsatz der Hashtabelle $T$ immer $U \leq F(v_r)$, da ansonsten nicht $i = T(I_U)$ 
-gelten würde. Nachdem ein $v_j$ gefunden wurde, für das \eqref{eq:hash_ineq} erfüllt ist, wird $X$ auf $v_j$ gesetzt.
+Nach diesen Vorberechnungen und Initialisierungen kann die Hashtabelle verwendet 
+werden, um eine Zufallszahl $X$ zu berechnen. Dafür wird aus einer uniformen 
+zufälligen Zahl $U$ das zugehörige $I_U$ \eqref{eq:hash_I} und $i = T(I_U)$ berechnet. $i$ 
+beschränkt damit die Teilmengen $F(v_j)$, die \eqref{eq:hash_ineq} erfüllen 
+können. Die zu überprüfenden Teilmengen sind gegeben durch die Menge $\{F(v_i),\, \dots,
+\, F(v_{r-1})\}$, wobei $r$ die nächstgrößere Zahl ist, für die $I(i) \neq I(r)$ 
+gilt. Für den Fall, dass $U > F(v_{r-1})$ ist, gilt bei Einsatz der Hashtabelle 
+$T$ immer $U \leq F(v_r)$, da ansonsten nicht $i = T(I_U)$ gelten würde. Nachdem 
+ein $v_j$ gefunden wurde, für das \eqref{eq:hash_ineq} erfüllt ist, wird $X$ auf 
+$v_j$ gesetzt.
 
-12 Jahre nach Chen und Asau's Ansatz wird in Devroye \cite{devroye-non_uniform_random_variate-1986} eine abgewandelte Methode 
-vorgestellt. Dabei wird eine Hashtabelle der Größe $N$ erstellt, wobei $N$ die Anzahl der möglichen Werte angibt. An der $i$-ten 
-Stelle in der Hashtabelle wird der Wert von $X$ mit $P(X) = p_X$ gespeichert, falls $U = \dfrac{i}{N},\, i \in [0,\, N)$ wäre. Nach 
-dieser Initialiserung wird der Startindex $Z$, ab welchem eine Lösung zu finden ist, mit $Z = \lfloor N * U \rfloor$ berechnet. 
-Mit $Z$ kann jetzt in der Hashtabelle ab diesem Index mit minimalem Aufwand eine Lösung der bekannten Formel \eqref{eq:hash_ineq} von Chen 
-und Asau gesucht werden. 
+12 Jahre nach Chen und Asau's Ansatz wird in Devroye 
+\cite{devroye-non_uniform_random_variate-1986} eine abgewandelte Methode 
+vorgestellt. Dabei wird eine Hashtabelle der Größe $N$ erstellt, wobei $N$ die 
+Anzahl der möglichen Werte angibt. An der $i$-ten Stelle in der Hashtabelle wird 
+der Wert von $X$ mit $P(X) = p_X$ gespeichert, falls $U = \dfrac{i}{N},\; i \in 
+[0,\, N)$ wäre. Nach dieser Initialiserung wird der Startindex $Z$, ab welchem 
+eine Lösung zu finden ist, mit $Z = \lfloor N * U \rfloor$ berechnet. Falls man 
+nuneine kummulative Verteilung vorliegen hat, oder eine Tabelle mit Partialsummen 
+erstellt hat, kann jetzt mit minimalem Aufwand ab der $Z$-ten Partialsumme eine 
+Lösung der bekannten Formel \eqref{eq:hash_ineq} von Chen und Asau gesucht werden.
