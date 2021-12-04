@@ -4,14 +4,23 @@ Solange die Daten nicht zu dicht beieinander liegen und die Größe der Hashtabe
 ist, werden sogar alle Eigenschaften der Funktion behalten. Dadurch kann man die hashbasierte 
 Inversiosmethode mit Modellen zur uniforem Generierung von Zufallszahlen, wie zum Beispiel Golden 
 Ratio Sequences \cite{schretter-golden_ratio_sequences-2012} oder Fibonnaci Grids 
-\cite{frisch_hanebeck-deterministic_gaussian_sampling-2021}, verbunden werden. Da nur minimaler 
-Verwaltungsaufwand betrieben werden muss, um die Inversionsmethode in höheren Dimensionen anzuwenden, 
-kann sie beinahe überall eingesetzt werden, um in $O(1)$ Zufallszahlen zu generieren. Durch die 
-einfache Arbeitsweise, die in dieser Ausarbeitung beschrieben wurde, kann die vorgestellte Methode 
-von jedem implementiert und verwendet werden. 
+\cite{frisch_hanebeck-deterministic_gaussian_sampling-2021}, verbinden. Je nach gewünschter 
+Genauigkeit ist der Verwaltungsaufwand und der Speicherverbrauch in höheren Dimensionen auch 
+nicht annehmbar, wenn man genügend Kapazitäten zur Verfügung hat. Falls dies der Fall ist, benötigt 
+man, nach einer anfänglichen Initialisierungsphase nur $O(1)$ Zeit, um Zufallszahlen zu generiern. 
+Darum kann die Hash-basierte Inversionsmethode beinahe überall eingesetzt werden. Da die 
+vorgestellte Methode auf einem einfachen Prinzip beruht und dieses in dieser Ausarbeitung ausführlich 
+erläutert wird, kann jeder eine naive Implementierung der hash-basierten Inversionsmethode selbst verwenden.
 
 
 \subsection{Verbesserungsmöglichkeiten}
-Wie in dem Abschnitt \hyperref[Dichte]{Dichte} angesprochen, kann die Methode verbessert werden, 
-in dem nicht nur gleichverteilte Werte in der Hashtabelle gespeichert werden, sondern eine 
-Vorauswahl getroffen wird, die für Gebiete mit hoher Dichte mehr Einträge in der Hashtabelle speichert.
+Wie in dem Abschnitt \hyperref[Dichte]{Dichte} angesprochen, liefert die Methode nur noch 
+suboptimale Ergebnisse, wenn die Punkte an wenigen Stellen sehr dicht beieinander liegen, 
+ansonsten aber weiter voneinander entfernt. Aus Gründen der Optimierung wird dann meist eine 
+kleinere Hashtabelle gewählt, wodurch diese eng beianderliegenden Punkte zusammenfallen.
+Dieses Problem könnte man dadurch lösen, dass in der Hashtabelle die Punkte nicht mehr 
+gleichmäßig verteilt eingesetzt werden, sondern an Stellen mit höherer Dichte mehr Einträge 
+vorhanden sind. Diese Anpassungen kann die Initialisierung der Hashtabelle allerdings sehr 
+viel langsamer oder größer machen, weshalb in solchen Fällen abgewogen werden muss, welcher 
+Aspekt für das gegebenere Problem wichtiger ist.
+
