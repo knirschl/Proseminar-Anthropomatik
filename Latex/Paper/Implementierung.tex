@@ -1,41 +1,70 @@
 \section{Implementierung}
 \label{impl}
-\begin{figure*}[htb!]
+\begin{figure*}%{htb!}
     \centering
     \begin{subfigure}[b]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{pdf_plots/idf2_log-sin_iu500c-RND.pdf}
-        \caption{Eingabewerte zufällig generiert mit \code{random}}
-        \label{fig:logsin_random}
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_log-log_iu500c-GRS.pdf}
+        \caption{Logistische Dichte auf der X- und Y-Achse}
+        \label{fig:loglog_examplePlot}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{pdf_plots/idf2_log-sin_iu500c-GRS.pdf}
-        \caption{Eingabewerte aus einer Goldenen Schnitt Sequenz}
-        \label{fig:logsin_uniform}
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_sin-expo_iu500c-GRS.pdf}
+        \caption{Sinusodial auf der X- und exponentiell auf der Y-Achse verteilt}
+        \label{fig:sinexpo_examplePlot}
     \end{subfigure}
-    \caption{$500$ Punkte mit einer logistischen Dichte auf der X- und einer sinusoiden auf der Y-Achse}
-    \label{fig:rand_vs_uniform}
+    \hfill
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_snrv_iu500c-GRS.pdf}
+        \caption{Standardnormalverteilung in beide Richtungen}
+        \label{fig:snrv_examplePlot}
+    \end{subfigure}
+    \caption{Mehrere inverse Funktionen mit je $500$ Punkten.}
+    \label{fig:examplePlot}
 \end{figure*}
 
+Um einen Eindruck der hashbasierten Inversionsmethode und ihrer Arbeitsweise zu 
+bekommen, wird jetzt eine konkrete Implementierung dieser angesprochen und E
+rgebnisse bei unterschiedlichen Eingaben gezeigt. Geschrieben wurde das Programm 
+in Python mithilfe der Pakete \textit{numpy} und \textit{matplotlib}.
 
-Um einen Eindruck der hashbasierten Inversionsmethode und ihrer Arbeitsweise zu bekommen, 
-wird jetzt eine konkrete Implementierung dieser angesprochen und Ergebnisse bei 
-unterschiedlichen Eingaben gezeigt. Geschrieben wurde das Programm in Python mithilfe der 
-Pakete \textit{numpy} und \textit{matplotlib}.
+Schretter \cite{schretter-golden_ratio_sequences-2012} stellt am Ende der Arbeit 
+eine C++-Methode zur Generierung einer zweidimensionalen Goldenen-Schnitt-Sequenz 
+zur Verfügung. Diese Methode wurde in ein Python-Script übertragen und alle, in 
+diesem Kapitel erwähnte, zufällige, uniformenVariablen $U$ werden mit diesem Script 
+generiert.
 
-Schretter \cite{schretter-golden_ratio_sequences-2012} stellt am Ende der Arbeit eine 
-C++-Methode zur Generierung einer zweidimensionalen Goldenen-Schnitt-Sequenz zur Verfügung. 
-Diese Methode wurde in ein Python-Script übertragen und alle, in diesem Kapitel erwähnte, zufällige, uniformen
-Variablen $U$ werden mit diesem Script generiert.
+Zum Testen der vorgestellten Methode wurde das Konzept von Devroye \cite{devroye-non_uniform_random_variate-1986} 
+implementiert. Dabei wurde kein großer Wert auf optimale Laufzeiten gelegt, sondern 
+darauf, eine Demonstration des Verfahrens geben zu können. Am Ende dieser Arbeit \ref{alg:inv_hash1}
+ist in einer Mischung aus Python und Pseudocode der Kern der Implementierung zu 
+sehen. Zusätzlich dazu ist der gesamte Algorithmus in diesem \href{https:github.com/knirschl/Proseminar-Anthropomatik}
+{Git-Repository}zu finden. 
 
-Zum Testen der vorgestellten Methode wurde das Konzept von Chen und Asau \cite{chen_asau-generating_random_variates-1974} 
-implementiert. Dabei wurde kein großer Wert auf optimale Laufzeiten gelegt, sondern darauf, eine Demonstration 
-des Verfahrens geben zu können.
+Die eigentliche Inversionsmethode mit Hashtabelle ist in \code{guidetable.py} 
+implementiert. Dabei beschreiben die Methoden \code{\_\_init\_\_}, \code{hash} und \code{search\_single} 
+das Invertieren und Hashen.. In \code{\_\_init\_\_} wird die Hashtabelle mit ihren 
+Werten populiert, wie es in dem Kapitel \hyperref[funktion_invhashing]{Inversion mit Hashing} 
+beschrieben wurde. Die Funktion \code{search\_single} sucht ab dem gehashten Wert der 
+eingegebenen Zufallsvariable solange in der Partialsummenliste, die davor entweder berechnet 
+oder übergeben wurde, bis die Ungleichung zum Finden des zugehörigen $X$-Wertes \eqref{eq:hash_ineq} 
+erfüllt ist. Damit nicht jeder Punkt einzeln berechnet werden muss, kann mit der Funktion 
+\code{search} ein zweidimensionales Feld übergeben werden, für das dann die korrespondierenden 
+Werte berechnet und zurückgegeben werden. Eine andere wichtige Datei ist \code{golden\_ratio\_sequence.py}. 
+Diese Datei fasst Methoden zur Generierung von Goldenen-Schnitt-Sequenzen zusammen und wurde 
+von Schretter übernommen und nach Python übertragen. 
 
-% TODO
-% Ergebnisse bei unterschiedlichen Werten auswerten nicht nur im Bild
-\dots
-
-
+In \ref{fig:examplePlot} sind drei Punktemengen zu sehen, bei denen eine Goldene-Schnitt-Sequenz 
+in der vorgestellten Implemtierung generiert und dann mit \code{guidetable.py} verformt wurden. 
+Alle drei Abbildungen zeigen 500 Punkte, wobei 
+einmal \ref{fig:loglog_examplePlot} auf beiden Achsen eine logistische Dichte 
+\ref{tab:invFuncs} angewendet wurde. Im Gegensatz dazu ist bei 
+\ref{fig:sinexpo_examplePlot} die X-Koordinate mit einer Sinusfunktion verschoben 
+und die Y-Koordinate nach einer exponentiellen Verteilung \ref{tab:invFuncs}. Man 
+kann leicht die sinusförmigen Wellen sehen, bei denen die Punkte enger aneinander 
+liegen. In der dritten Abbildung \ref{fig:snrv_examplePlot} sind beide 
+Koordinatenanteile standardnormalverteiltverformt, wodurch das bekannte Spiralmuster 
+entsteht. 

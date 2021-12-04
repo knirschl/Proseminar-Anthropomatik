@@ -15,30 +15,23 @@ Funktionsweise der Hash-basierten Inversionsmethode zu erläutern.
 % (b) 500 Punkte standardnormalverteilt \eqref{eq:stdnormdensity}.}
 %     \label{bild:examplePlot}
 % \end{figure}
-\begin{figure*}%{htb!}
+\begin{figure*}%[htb!]
     \centering
     \begin{subfigure}[b]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{pdf_plots/idf2_log-log_iu500c-GRS.pdf}
-        \caption{Logistische Dichte auf der X- und Y-Achse}
-        \label{fig:loglog_examplePlot}
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_log-sin_iu500c-RND.pdf}
+        \caption{Eingabewerte zufällig generiert mit \code{random}}
+        \label{fig:logsin_random}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{.3\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{pdf_plots/idf2_sin-expo_iu500c-GRS.pdf}
-        \caption{Sinusodial auf der X- und exponentiell auf der Y-Achse verteilt}
-        \label{fig:sinexpo_examplePlot}
+        \includegraphics[width=\textwidth]{pdf_plots/idf2_log-sin_iu500c-GRS.pdf}
+        \caption{Eingabewerte aus einer Goldenen Schnitt Sequenz}
+        \label{fig:logsin_uniform}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{pdf_plots/idf2_snrv_iu500c-GRS.pdf}
-        \caption{Standardnormalverteilung in beide Richtungen}
-        \label{fig:snrv_examplePlot}
-    \end{subfigure}
-    \caption{Mehrere inverse Funktionen mit je $500$ Punkten.}
-    \label{fig:examplePlot}
+    \caption{$500$ Punkte mit einer logistischen Dichte auf der X- und einer sinusoiden auf der Y-Achse}
+    \label{fig:rand_vs_uniform}
 \end{figure*}
 
 
@@ -69,16 +62,28 @@ $(x_1, x_2)$, bei dem $X_1$ und $X_2$ maximal anti-korreliert zueinander sind, m
     (F^{-1}(U),\, F^{-1}(1 - U))
 \end{equation}
 berechnet werden kann. Diese Eigenschaft wird vor allem in Simulationen benötigt.
-Wählt man als Eingabe $U$ eine Goldene-Schnitt-Sequenz, wie sie in \ref{fig:grs500} 
-zu sehen ist, dann können diese gleichmäßig verteilten Punkte durch die 
-Inversionsmethode \glqq gewarped\grqq werden. In \ref{fig:examplePlot} sind drei solche 
-verformten Punktmengen zu sehen. Alle drei Abbildungen zeigen 500 Punkte, wobei 
-einmal \ref{fig:loglog_examplePlot} auf beiden Achsen eine logistische Dichte \ref{tab:invFuncs} angewendet wurde. 
-Im Gegensatz dazu ist bei \ref{fig:sinexpo_examplePlot} die X-Koordinate mit einer 
-Sinusfunktion verschoben und die Y-Koordinate nach einer exponentiellen Verteilung \ref{tab:invFuncs}.
-Man kann leicht die sinusförmigen Wellen sehen, bei denen die Punkte enger aneinander liegen. 
-In der  dritten Abbildung \ref{fig:snrv_examplePlot} sind beide Koordinatenanteile standardnormalverteilt
-verformt, wodurch das bekannte Spiralmuster entsteht. 
+
+Da im Folgenden nur noch von gleichmäßig verteilten Ausgangswerten gesprochen 
+wird, wird kurz erklärt, warum sich diese Ausarbeitung nur darauf beschränkt. In 
+Abbildung \ref{fig:rand_vs_uniform} sind zwei Abbildungen zu sehen. Beide 
+Abbildungen bilden $500$ Punkte $y \in [0, 1]$ auf $500$ andere Punkte ab. Dabei 
+wird der X-Achsenanteil der Punkte mithilfe einer logarithmischen Funktion, siehe 
+\ref{tab:invFuncs}, und der Y-Achsenanteil mit einer Sinusfunktion verformt. In 
+\ref{fig:logsin_random} sind die gewählten Ausgangswerten mit der \code{uniform}-
+Funktion des Pythonpaketes \textit{random} zufällig generiert worden. Zum einen 
+lässt sich dadurch die Funktion nicht genauso gut erkennen, wie mit nicht-zufälligen 
+Punkten. Zum anderen entstehen dadurch die für computergenerierte, naive 
+Zufallsfunktionen typischen Ketten an Punkten und Stellen mit höherer Dichte, 
+sowie leere Flecken. Wie in der Einleitung beschrieben, benötigen 
+Simulationsalgorithmen aber eine homogene Verteilung, um genauer simulieren zu können. 
+Um dies zu erreichen, kann, wie schon erwähnt, eine Goldene-Schnitt-Sequenz verwendet 
+werden. Die selbe Funktion wie aus \ref{fig:logsin_random} ist auch in \ref{fig:logsin_uniform} 
+verwendet worden, allerdings wurde eine Goldene-Schnitt-Sequenz verwendet. Diese 
+Sequenz beschreibt auch zufällig verteilte Zahlen, allerdings werden die Punkte 
+durch die Berechnungsvorschrift gleichmäßig verteilt. Dies hat auch sichtbare Auswirkkungen 
+auf die Verformung, da auch nach der Verformung die Punkte noch gleichmäßig verteilt 
+sind und keine Cluster entstehen. Offensichtlich kann ein Algorithmus diese Daten 
+besser für Schätzberechnungen verwenden, als zufällig verteilte Daten.
 
 Durch die Erzeugung der Zufallsvariable $X$ durch das Inverse einer 
 Verteilungsfunktion kann die Inversionsmethode allerdings nur dann optimal 
@@ -121,6 +126,7 @@ gesehen, geschrieben.
 
 
 \subsection{Inversion mit Hashing}
+\label{funktion_invhashing}
 Bei komplizierteren Inversen ist die normale Inversionsmethode nicht 
 mehr effizient anwendbar. Um sie beschleunigen zu können wurden deshalb mehrere 
 Möglichkeiten entwickelt. Eine davon ist es, eine Hashtabelle in der von Chen und 
