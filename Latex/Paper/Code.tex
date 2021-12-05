@@ -1,4 +1,4 @@
-\section{Code}
+%\section{Code}
 
 \begin{algorithm}
     \caption{Implementation of the hash-based inversion method (Part 1)}
@@ -40,6 +40,7 @@
             \State $self.PS \gets \textrm{np.array}(ps)$
         \EndFunction
         \State
+
         \algstore{bkbreak}
     \end{algorithmic}
 \end{algorithm}
@@ -48,7 +49,6 @@
     \caption{Implementation of the hash-based inversion method (Part 2)}
     \begin{algorithmic}
         \algrestore{bkbreak}
-
         \Input
         \Desc{U}{random variate}
         \EndInput
@@ -59,6 +59,7 @@
             \State\Return $\lfloor self.N * \textrm{U} \rfloor$
         \EndFunction
         \State
+
 
         \Input
         \Desc{U}{random variate}

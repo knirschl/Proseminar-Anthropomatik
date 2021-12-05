@@ -1,7 +1,8 @@
 \section{Vergleich}
 \begin{figure}
     \centering
-    \includegraphics[width=0.48\textwidth]{Screenshots/chenAsauHashTableComp.png}
+    \def\svgwidth{\columnwidth}
+    \scalebox{1}{\input{../../Media/Screenshots/chenAsauHashTableComp.pdf_tex}}
     \caption{Laufzeiten unterschiedlicher Algorithmen: Standard (\eqref{eq:hash_ineq} 
         wird trivial berechnet), Bisection (\eqref{eq:hash_ineq} wird mit einfacher 
         binarär Suche berechnet) und Proposed (die vorgestellte Methode mit 
@@ -18,7 +19,8 @@ hängt mit der
 Eigenschaft von Arrays und Hashtabellen zusammen, auf jedes Element in $O(1)$ 
 zugreifen zu können. Deshalb kann die hashbasierte Inversionsmethode ihre 
 Stärken erst bei vielen zu überprüfenden Intervallen, und damit Einträgen in 
-der Tabelle, ausspielen. In Chen und Asau's Tests sieht man, das für wenige 
+der Tabelle, ausspielen. In Chen und Asau's Tests, deren Ergebnisse in der Tabelle 
+\ref{fig:computationTimeComp} aufgezeigt sind, sieht man, das für wenige 
 Intervalle ($5$) die Hashtabelle langsamer ist als triviales Testen der 
 Ungleichungen. Mit $100$ Einträgen ist die vorgestellte Methode aber schon mehr 
 als $3$-mal so schnell wie herkömmliche Verfahren. Das liegt daran, dass bei 
