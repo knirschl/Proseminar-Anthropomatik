@@ -1,0 +1,55 @@
+%% Beispiel-Präsentation
+\documentclass{sdqbeamer} 
+ 
+%% Titelbild
+\titleimage{banner_2020_kit}
+
+%% Gruppenlogo
+
+%\grouplogo{ISAS_logo} 
+
+% Beginn der Präsentation
+
+\title[Punkt-Warping]{Punkt-Warping: Inversionsmethode mit Hashing}
+%\subtitle{entsprechend den Gestaltungsrichtlinien vom 1. August 2020} 
+\author[Lukas Knirsch]{Lukas Knirsch}
+\supervisor{Daniel Frisch}
+
+\date[20.\,12.\,2021]{20. Dezember 2021}
+
+% Literatur 
+ 
+\usepackage[citestyle=authoryear,bibstyle=numeric,hyperref,backend=biber]{biblatex}
+\addbibresource{presentation.bib}
+\bibhang1em
+
+\begin{document}
+
+% Titelseite
+\KITtitleframe
+
+% Inhaltsverzeichnis
+\begin{frame}{Inhaltsverzeichnis}
+\tableofcontents
+\end{frame}
+
+% Text
+\section{Einstieg}
+
+\section{Funktionsweise}
+
+\section{Vergleich}
+
+\section{Implementierung}
+
+% Appendix
+\appendix
+\beginbackup
+
+\begin{frame}{Literatur}
+	\printbibliography
+\end{frame}
+
+\backupend
+
+\end{document}
