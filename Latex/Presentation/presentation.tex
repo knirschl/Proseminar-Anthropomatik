@@ -1,6 +1,27 @@
-%% Beispiel-Präsentation
-\documentclass{sdqbeamer} 
+\documentclass{sdqbeamer}
+% Handout-Mode
+%\documentclass[handout]{sdqbeamer}
+
+% Ein paar hilfreiche Pakete
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amssymb}
  
+% Für Code-Schnipsel
+\def\code#1{\texttt{#1}}
+
+% Graphics Paths
+\graphicspath{{../../Media}}
+
+% Für subfigure plots
+\captionsetup[subfigure]{justification=centering}
+
+
+
 %% Titelbild
 \titleimage{banner_2020_kit}
 
@@ -30,21 +51,36 @@
 
 % Inhaltsverzeichnis
 \begin{frame}{Inhaltsverzeichnis}
-\tableofcontents
+	\tableofcontents
 \end{frame}
 
+% HOW TO FIGURE
+% 
+%\begin{figure}
+%	\centering
+%	\begin{subfigure}{.4\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{pdf_plots/grs_u500c.pdf}
+%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}{.4\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{pdf_plots/idf2_log-log_iu500c-GRS.pdf}
+%	\end{subfigure}
+%\end{figure}
+
 % Text
-\section{Einstieg}
-
-\section{Funktionsweise}
-
-\section{Vergleich}
-
-\section{Implementierung}
+\include{Einstieg}
+\include{Funktionsweise}
+\include{Vergleich}
+\include{Implementation}
+\include{Zusammenfassung}
 
 % Appendix
 \appendix
 \beginbackup
+
+\section{Anhang}
 
 \begin{frame}{Literatur}
 	\printbibliography
