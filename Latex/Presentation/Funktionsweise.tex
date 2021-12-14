@@ -1,18 +1,62 @@
 \section{Funktionsweise}
 
 \begin{frame}{Inversionsmethode}
+	\begin{figure}
+		\begin{subfigure}{.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{pdf_plots/logistic_-4to4.pdf}
+            \caption{F mit Werten von $-4$ bis $4$}
+		\end{subfigure}
+		\begin{subfigure}{.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{pdf_plots/logistic_inv_0to1.pdf}
+            \caption{F$^{-1}$ mit Werten von $0$ bis $1$}
+		\end{subfigure}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Inversionsmethode}
+    \begin{itemize}
+        \item Inverse einer Dichtefunktion benötigt 
+        \item Entweder bekannt %\onslide<2->%, siehe \textit{\hyperref[tab:invFunctions]{Tabelle}} 
+            oder numerisch integrierbar/annäherbar
+    \end{itemize}
     \begin{table}%[htb!]
         \centering
         \begin{tabular}{l|l|l}
-        Name         & Funktion & Zufällige Variable \\
-        \hline\hline & & \\
-        Exponentiell & $1 - e^{-x}$ & $\log(1/U)$ \onslide<2-> \\
-        Logistisch   & $1 / (1 + e^{-x})$ & $-\log(\dfrac{1-U}{U})$  \onslide<3-> \\
-        Cauchy       & $1/2 + (1/\pi) \arctan(x)$ & $\tan(\pi U)$
+            Name         & Funktion & Zufällige Variable \\
+            \hline\hline %& & \\
+            Exponentiell & $1 - e^{-x}$ & $\log(1/U)$ \\ %\onslide<2->
+            Logistisch   & $1 / (1 + e^{-x})$ & $-\log(\dfrac{1-U}{U})$ \\ %\onslide<3->
+            Cauchy       & $1/2 + (1/\pi) \arctan(x)$ & $\tan(\pi U)$
         \end{tabular}
+        \label{tab:invFunctions}
     \end{table}
 \end{frame}
 
 \begin{frame}{Hash-basierte Inversionsmethode}
-    
+    \begin{table}%[htb!]
+        \centering
+        \begin{tabular}{l|l|l|l}
+            $X_j$   & F$(X_j)$  & $I_j$ & T$(I_j)$ \\
+            \hline\hline % & & & \\
+            $v_1$   & $0.021$   & $1$   & 1 \\ 
+            $v_2$   & $0.021$   & $1$   & 1 \\
+            $v_3$   & $0.021$   & $1$   & 1 \\
+            $v_4$   & $0.021$   & $1$   & 1 \\ 
+            $v_5$   & $0.021$   & $1$   & 1 \\
+            $v_6$   & $0.021$   & $1$   & 1
+        \end{tabular}
+        \hspace{2em}
+        \begin{tabular}{l|l|l|l}
+            $X_j$   & F$(X_j)$  & $I_j$ & T$(I_j)$ \\
+            \hline\hline % & & & \\
+            $v_7$   & $0.021$   & $1$   & 1 \\ 
+            $v_8$   & $0.021$   & $1$   & 1 \\
+            $v_9$   & $0.021$   & $1$   & 1 \\
+            $v_{10}$  & $0.021$   & $1$   & 1 \\ 
+            $v_{11}$  & $0.021$   & $1$   & 1 \\
+            $v_{12}$  & $0.021$   & $1$   & 1
+        \end{tabular}
+    \end{table}
 \end{frame}

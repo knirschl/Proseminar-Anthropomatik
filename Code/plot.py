@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 import os
 
+DEFAULT_VALUE = 4
+
 def cart2pol(x, y):
     r = np.sqrt(x**2 + y**2)
     phi = np.arctan2(y, x)
@@ -25,6 +27,18 @@ def plot(points, centered=2, color=colors.CSS4_COLORS['dodgerblue'], markersize=
     ymax = np.max(y_axis)
     xabsmax = np.max(np.abs(x_axis))
     yabsmax = np.max(np.abs(y_axis))
+    if (xmin == -np.inf):
+        xmin = -DEFAULT_VALUE
+    if (ymin == -np.inf):
+        ymin = -DEFAULT_VALUE
+    if (xmax == np.inf):
+        xmax = DEFAULT_VALUE
+    if (ymax == np.inf):
+        ymax = DEFAULT_VALUE
+    if (xabsmax == np.inf):
+        xabsmax = DEFAULT_VALUE
+    if (yabsmax == np.inf):
+        yabsmax = DEFAULT_VALUE
 
     ax = plt.subplot(polar=(system == 'pol'))
     #ax.spines['left'].set_position('center')

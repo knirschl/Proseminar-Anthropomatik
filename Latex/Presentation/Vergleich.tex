@@ -8,3 +8,35 @@
     \end{figure}
 \end{frame}
 
+\begin{frame}{Vergleich der Invertierungsmethoden}
+    \begin{table}
+        \centering
+        \begin{tabular}{c|c|c|c|c|c|c|c}
+            \multirow{2}{*}{Größe} & \multirow{2}{*}{Methode} & \multicolumn{6}{c}{Anzahl an generierten Zufallsvariablen} \\
+            \cline{3-8} & & 200 & 300 & 500 & 1000 & 3000 & 7000 \\
+            \hline\hline
+            \multirow{3}{*}{5} & Standard & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+            \cline{3-8}[dotted] & Binäre Suche & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+             & Hash-basiert & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+            \hline
+            \multirow{3}{*}{10} & Standard & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+             & Binäre Suche & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+             & Hash-basiert & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+            \hline
+            \multirow{3}{*}{20} & Standard & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+             & Binäre Suche & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+             & Hash-basiert & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+            \hline
+            \multirow{3}{*}{50} & Standard & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+             & Binäre Suche & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+             & Hash-basiert & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+            \hline
+            \multirow{3}{*}{100} & Standard & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+             & Binäre Suche & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900 \\
+             & Hash-basiert & 0.0123 & 0.0456 & 0.0789 & 0.1230 & 0.4567 & 0.8900
+        \end{tabular}
+    \end{table}
+    
+
+\end{frame}
+

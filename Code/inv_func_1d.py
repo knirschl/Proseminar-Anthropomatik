@@ -1,9 +1,13 @@
 import numpy as np
 
-UNDEFINED = 0
+UNDEFINED = 10
 
 def expo(x):
     return 1 - np.exp(-x)
+    # x = log(1/y)
+    # e^x = 1/y
+    # ye^x = 1
+    # y = e^-x
 
 def expo_inv(U):
     try:
