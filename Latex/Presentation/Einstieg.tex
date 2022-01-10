@@ -2,15 +2,20 @@
 
 \begin{frame}{Problemstellung}
 	\begin{itemize}
-		\item Punkte gleichmäßig im Raum verteilen
-		\item Mehrere existierende Verfahren
+		\item Punkte nach Dichtefunktion im Raum verteilen
+		\item<2-> Mehrere existierende Verfahren
 		\begin{itemize}
-			\item Halton
-			\item Blue noise
+			\item Halton (\cite{wong_luk_heng-halton_points_sampling-1997})
+			\item Blue Noise (\cite{yan-blue_noise_sampling-2015})
 		\end{itemize}
-		\item \textbf{Ziel 1}: effizientes Vorgehen 
-		\item \textbf{Ziel 2}: mehrdimensional anwendbar
-		\item \textbf{Ziel 3}: unabhängig von bestimmten Eigenschaften der Funktion einsetzbar
+		\item<3-> \textit{Erweiterung:} gleichmäßige Verteilung
+		\begin{itemize}
+			\item Golden Ratio Sequences + Halton/Blue Noise (\cite{schretter-golden_ratio_sequences-2012})
+			\item Fibonacci Grids (\cite{frisch_hanebeck-deterministic_gaussian_sampling-2021})
+		\end{itemize}
+		\item<4->\textbf{Ziel 1:} effizientes Vorgehen 
+		\item<5->\textbf{Ziel 2:} mehrdimensional anwendbar
+		\item<6->\textbf{Ziel 3:} unabhängig von bestimmten Eigenschaften der Funktion einsetzbar
 	\end{itemize}
 \end{frame}
 
@@ -30,5 +35,6 @@
 			\centering
 			\includegraphics[width=\textwidth]{pdf_plots/idf2_log-log_iu500c-GRS.pdf}
 		\end{subfigure}
+		\caption{\cite{schretter-golden_ratio_sequences-2012}}
 	\end{figure}
 \end{frame}

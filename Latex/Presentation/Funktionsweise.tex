@@ -24,32 +24,60 @@
     \begin{table}%[htb!]
         \centering
         \begin{tabular}{l|l|l}
-            Name         & Funktion & Zufällige Variable \\
+            Name         & Funktion F & Zufällige Variable F$^{-1}$ \\
             \hline\hline %& & \\
             Exponentiell & $1 - e^{-x}$ & $\log(1/U)$ \\ %\onslide<2->
             Logistisch   & $1 / (1 + e^{-x})$ & $-\log(\dfrac{1-U}{U})$ \\ %\onslide<3->
             Cauchy       & $1/2 + (1/\pi) \arctan(x)$ & $\tan(\pi U)$
         \end{tabular}
-        \label{tab:invFunctions}
+        \caption{\cite{devroye-non_uniform_random_variate-1986}}
     \end{table}
 \end{frame}
 
 \begin{frame}{Hash-basierte Inversionsmethode}
-    \dots
+    \textbf{Initialisierung.}\\
+    Funktion $F$ und Wahrscheinlichkeiten $v_j,\, j \in [1,\, n]$
+    \begin{itemize}
+        \item<2-> \textbf{Problem:} einfache Inversionsmethode ineffizient
+%       \item<3-> \begin{equation}
+%                    F(v_{j-1}) < U \leq F(v_j)
+%                       \label{eq:hash_ineq}
+%                  \end{equation} benötigt naiv $O(n)$.
+        \item<3-> \inlineequation[eq:hash_ineq]{F(v_{j-1}) < U \leq F(v_j)} benötigt naiv $O(n)$
+%        \item<4-> Berechne 
+%                 \begin{equation}
+%                        I_j = \lfloor F(v_j) * d \rfloor + 1
+%                        \label{eq:hash_I}
+%                  \end{equation}
+        \item<4-> Berechne \inlineequation[eq:hash_I]{I_j = \lfloor F(v_j) * d \rfloor + 1}
+        \item<5-> für Tabelleneintrag $T(I_j) = k$, sodass $I(k) = I(j)$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hash-basierte Inversionsmethode}
+    \textbf{Generierung.}\\
+    Hashtabelle mit Einträgen $T(i)$ und Zufallszahl $U$.
+    \begin{itemize}
+        \item<2-> Berechne $I_U$ mit \eqref{eq:hash_I}
+        \item<3-> für Index $i = T(i_U)$.
+        \item<4-> Überprüfe Menge der Teilmengen $\{F(v_i),\, \dots,\, F(v_{r-1})\}$ mit 
+                \eqref{eq:hash_ineq}, sodass $I(i) \neq I(r)$ und $r > i$.
+        \item<5-> Sobald Ungleichung \eqref{eq:hash_ineq} erfüllt, ist $X = v_j$
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Hash-basierte Inversionsmethode: Beispiel}
     \begin{figure}
         \centering
-		\includegraphics[width=.7\textwidth]{Screenshots/hashinv_exampleFuncPlot.png}
-        \caption{Verteilungsfunktion F (orange) und ihre kummulative Dichte $\mathrm{C_F}$}
+        \includegraphics[width=.65\textwidth]{pdf_plots/hashinv_exampleFuncPlot.pdf}
+        \caption{Verteilungsfunktion F (orange) und ihre kumulative Dichte $\mathrm{C_F}$}
     \end{figure}
 \end{frame}
 
 \begin{frame}{Hash-basierte Inversionsmethode: Beispiel}
     \begin{table}%[htb!]
         \centering
-        \begin{tabular}{l|l<{\onslide<2->}|l<{\onslide<3->}|c@{\hspace{\tabcolsep}\onslide<4->\onslide}}
+        \begin{tabular}{l|l<{\onslide<2->}|l<{\onslide<4->}|c@{\hspace{\tabcolsep}\onslide<4->\onslide}}
             $X_j$   & $\mathrm{C_ F}(X_j)$  & $I_j$ & T$(I_j)$ \\
             \hline\hline % & & & \\
             $v_1$   & $0.021$   & $1$   & $1$ \\ 
@@ -60,7 +88,7 @@
             $v_6$   & $0.501$   & $6$   & $6$
         \end{tabular}
         \hspace{2em}
-        \begin{tabular}{l|l<{\onslide<6->}|l<{\onslide<7->}|c@{\hspace{\tabcolsep}\onslide<8->\onslide<6->}}
+        \begin{tabular}{l|l<{\onslide<3->}|l<{\onslide<5->}|c@{\hspace{\tabcolsep}\onslide<5->\onslide}}
             $X_j$   & $\mathrm{C_F}(X_j)$  & $I_j$ & T$(I_j)$ \\
             \hline\hline % & & & \\
             $v_7$   & $0.592$   & $6$   & $6$ \\ 
@@ -70,20 +98,62 @@
             $v_{11}$& $0.907$   & $10$  & $11$\\
             $v_{12}$& $1.000$   & $11$  & $12$
         \end{tabular}
+        \caption{\cite{chen_asau-generating_random_variates-1974}}
     \end{table}
 \end{frame}
 
 \begin{frame}{Hash-basierte Inversionsmethode: Beispiel}
-    \begin{itemize}
-        \item $u = 0.628$
-        \begin{itemize}
-            \item $I_u = \lfloor u * 10\rfloor + 1 = 7$
-            \item $i = \mathrm{T}(I_u) = \mathrm{T}(7) = 8$
-            \item $r$ ist nächstgrößerer Index, sodass T$(v_r)\neq \mathrm{T}(v_i)$, also $r = 10$
-            \item F$v_{i-1} < u \leq \mathrm{F}(v_r)$
-            \item $u < \mathrm{F}(v_8)\rightarrow X = v_8$
-        \end{itemize}
-    \end{itemize}
-    
-    
+    \begin{table}%[htb!]
+        \centering
+        \begin{tabular}{l|l|l|c}
+            $X_j$   & $\mathrm{C_ F}(X_j)$  & $I_j$ & T$(I_j)$ \\
+            \hline\hline % & & & \\
+            $v_1$\cellcolor<4>{pyorange}   & $0.021$   & $1$\cellcolor<3->{pyblue}   & $1$\cellcolor<4>{pyorange}\\ 
+            $v_2$   & $0.060$   & $1$\cellcolor<3->{pyblue}   & $1$\cellcolor<4>{pyorange}\\
+            $v_3$   & $0.134$   & $2$   & $3$ \\
+            $v_4$   & $0.237$   & $3$   & $4$ \\
+            $v_5$   & $0.385$   & $4$   & $5$ \\
+            $v_6$   & $0.501$   & $6$   & $6$
+        \end{tabular}
+        \hspace{2em}
+        \begin{tabular}{l|l|l|c}
+            $X_j$   & $\mathrm{C_F}(X_j)$  & $I_j$ & T$(I_j)$ \\
+            \hline\hline % & & & \\
+            $v_7$   & $0.592$   & $6$   & $6$ \\ 
+            $v_8$   & $0.634$   & $7$   & $8$ \\
+            $v_9$   & $0.698$   & $7$   & $8$ \\
+            $v_{10}$\cellcolor<2>{pyorange}& $0.895$   & $9$\cellcolor<1-2>{pyblue}   & $10$\cellcolor<2>{pyorange}\\ 
+            $v_{11}$\cellcolor<2>{pyorange}& $0.907$   & $10$\cellcolor<1-2>{pyblue}  & $11$\cellcolor<2>{pyorange}\\
+            $v_{12}$& $1.000$   & $11$  & $12$
+        \end{tabular}
+        \caption{\cite{chen_asau-generating_random_variates-1974}}
+    \end{table}
 \end{frame}
+
+\begin{frame}{Hash-basierte Inversionsmethode: Beispiel}
+    \begin{minipage}{.47\textwidth}
+        $\textbf{u = 0.628}$
+        \begin{itemize}
+            \item<2-> $I_u = \lfloor u * 10\rfloor + 1 = 7$
+            \item<3-> $i = \mathrm{T}(I_u) = \mathrm{T}(7) = 8$
+            \item<4-> $r$ ist nächstgrößerer Index, sodass T$(v_r)\neq \mathrm{T}(v_i)$, also $r = 10$
+            \item<5-> F$v_{i-1} < u \leq \mathrm{F}(v_r)$
+            \item<6-> $u < \mathrm{F}(v_8)\rightarrow X = v_8$\\[\baselineskip]
+        \end{itemize}
+        \small\cite{chen_asau-generating_random_variates-1974}\normalsize
+    \end{minipage}
+    \begin{minipage}{.47\textwidth}
+        \begin{table}
+            \begin{tabular}{l|l|l|c}
+                $X_j$   & $\mathrm{C_F}(X_j)$  & $I_j$ & T$(I_j)$ \\
+                \hline\hline % & & & \\
+                $v_7$   & $0.592$   & $6$   & $6$ \\ 
+                $v_8$\cellcolor<6->{pyorange}   & $0.634$\cellcolor<5>{pyblue}   & $7$\cellcolor<2->{pyorange}   & $8$\cellcolor<3>{pyblue} \\
+                $v_9$   & $0.698$   & $7$   & $8$ \\
+                $v_{10}$& $0.895$   & $9$   & $10$\cellcolor<4->{pyorange}\\ 
+                $v_{11}$& $0.907$   & $10$  & $11$\\
+                $v_{12}$& $1.000$   & $11$  & $12$
+            \end{tabular}
+        \end{table}
+    \end{minipage}
+\end{frame} 

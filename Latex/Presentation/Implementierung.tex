@@ -1,0 +1,22 @@
+\section{Implementierung}
+
+\begin{frame}{Beispielcode}
+    %\begin{algorithm}
+        \begin{algorithmic}
+            %\Input
+            %\Desc{U}{random variate}
+            %\EndInput
+            %\Output
+            %\Desc{X}{from hash table calculated value corresponding to $U$, so that $\mathrm{F^{-1}}(U) = X$}
+            %\EndOutput
+            \Function{search\_single}{$self$, U}
+                \State $Z \gets self.hash(\textrm{U})$
+                \While{$self.T[Z] \le \textrm{U}$}
+                    $Z \gets Z + 1$
+                \EndWhile
+                \State\Return $self.PS[Z]$
+            \EndFunction
+            \cite{github_knirschl}
+        \end{algorithmic}
+    %\end{algorithm}
+\end{frame}

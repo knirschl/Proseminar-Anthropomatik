@@ -3,11 +3,20 @@
 \begin{frame}{Kurz \& Knapp}    
     \begin{itemize}
         \item Schnelle Generierung von großen Datenmengen
-        \item Beibehaltung aller Eigenschaften der ursprünglichen Funktion
-        \item einfaches Prinzip
+        \item<2-> Beibehaltung aller Eigenschaften der ursprünglichen Funktion
+        \item<3-> einfaches Prinzip
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Ausblick}   
-
+\begin{frame}{Verbesserungsmöglichkeit}   
+    \begin{itemize}
+        \item\textbf{Problem:} Funktion mit sehr hoher Dichte an wenigen Stellen, sonst nur geringe Dichte.
+        \begin{itemize}[label=$\rightarrow$]
+            \item<2-> Dort fallen alle Punkte zusammen.
+            \item<3-> Hohe Ungenauigkeit an wichtigen Stellen.
+        \end{itemize}
+        \item<4->\textbf{Lösung:} Hashtabelle nicht gleichmäßig populieren, sondern für diese 
+        Stellen höhere Genauigkeit durch mehr Einträge ermöglichen.
+        \item<5->\textbf{Allerdings:} stark erhöhter Initialisierungsaufwand
+    \end{itemize} 
 \end{frame}

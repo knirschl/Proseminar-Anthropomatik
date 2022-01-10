@@ -1,22 +1,55 @@
 \documentclass{sdqbeamer}
 % Handout-Mode
 %\documentclass[handout]{sdqbeamer}
+\makeatletter
+\newcommand*{\inlineequation}[2][]{%
+  \begingroup
+    % Put \refstepcounter at the beginning, because
+    % package `hyperref' sets the anchor here.
+    \refstepcounter{equation}%
+    \ifx\\#1\\%
+    \else
+      \label{#1}%
+    \fi
+    % prevent line breaks inside equation
+    \relpenalty=10000 %
+    \binoppenalty=10000 %
+    \ensuremath{%
+      % \displaystyle % larger fractions, ...
+      #2%
+    }%
+    ~\@eqnnum
+  \endgroup
+}
+\makeatother
 
 % Ein paar hilfreiche Pakete
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{array}
+\usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{multirow}
 \usepackage{tabularray}
+\usepackage{color}
+\usepackage{colortbl}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{hyperref}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
  
 % Für Code-Schnipsel
 \def\code#1{\texttt{#1}}
+
+% Für Pseudocode input und output einer funktion
+\algblock{Input}{EndInput}
+\algnotext{EndInput}
+\algblock{Output}{EndOutput}
+\algnotext{EndOutput}
+\newcommand{\Desc}[2]{\State \makebox[3em][l]{#1}#2}
 
 % Graphics Paths
 \graphicspath{{../../Media}}
@@ -24,7 +57,16 @@
 % Für subfigure plots
 \captionsetup[subfigure]{justification=centering}
 
+% Für "normale" itemize
+\setlist[itemize,1]{label={\raisebox{.2ex}{\KITmark}}}
+\setlist[itemize,2]{label={\raisebox{.2ex}{\KITmark}}}
 
+% Für gefärbte Tabellen
+\renewcommand<>\cellcolor[1]{\only#2{\beameroriginal\cellcolor{#1}}}
+\definecolor{pyblue}{rgb}{0.361, 0.725, 1.0}
+\definecolor{pyorange}{rgb}{1.0, 0.725, 0.285}
+\definecolor{Gray}{gray}{0.9}
+\newcolumntype{G}{>{\columncolor{Gray}}c} % colored column
 
 %% Titelbild
 \titleimage{banner_2020_kit}
@@ -40,7 +82,7 @@
 \author[Lukas Knirsch]{Lukas Knirsch}
 \supervisor{Daniel Frisch}
 
-\date[20.\,12.\,2021]{20. Dezember 2021}
+\date[12.\,01.\,2022]{12. Januar 2022}
 
 % Literatur 
  
@@ -58,26 +100,11 @@
 	\tableofcontents
 \end{frame}
 
-% HOW TO FIGURE
-% 
-%\begin{figure}
-%	\centering
-%	\begin{subfigure}{.4\textwidth}
-%		\centering
-%		\includegraphics[width=\textwidth]{pdf_plots/grs_u500c.pdf}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}{.4\textwidth}
-%		\centering
-%		\includegraphics[width=\textwidth]{pdf_plots/idf2_log-log_iu500c-GRS.pdf}
-%	\end{subfigure}
-%\end{figure}
-
 % Text
 \include{Einstieg}
 \include{Funktionsweise}
 \include{Vergleich}
-\include{Implementation}
+\include{Implementierung}
 \include{Zusammenfassung}
 
 % Appendix
@@ -86,8 +113,12 @@
 
 \section{Anhang}
 
-\begin{frame}{Literatur}
+\begin{frame}[allowframebreaks]{Literatur}
 	\printbibliography
+\end{frame}
+
+\begin{frame}[plain]
+	\centering\Huge Vielen Dank für Ihre Aufmerksamkeit!
 \end{frame}
 
 \backupend
